@@ -1,74 +1,61 @@
-<div align="center">
+[![Sunghoo Jung Banner](https://capsule-render.vercel.app/api?type=waving&color=0:05122A,100:0D1B2A&height=200&section=header&text=Sunghoo%20Jung&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=CS%20%2B%20Math%20@%20Rutgers%20|%20ML%20Researcher&descAlignY=55&descSize=18&descColor=8892b0)](https://github.com/sunghoojung)
 
-# Hey, I'm Sunghoo Jung 👋
+<img src="https://raw.githubusercontent.com/AVS1508/AVS1508/master/assets/Night-Coding.gif" align="right" width="270"/>
 
-CS + Math @ Rutgers University | ML Researcher
+### 👨🏻‍💻 &nbsp;About Me
 
-[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sunghoo-jung/)
-[![Website](https://img.shields.io/badge/-Portfolio-000?style=for-the-badge&logo=vercel&logoColor=white)](https://sunghoojung.com)
-
-</div>
-
----
-
-### 🧠 What I'm Up To
-
-- 🚂 **Rail Lab** — Building real-time computer vision systems for railroad monitoring (RESNET, LiDAR, video segmentation)
-- 🧬 **Neurodegenerative Diseases Lab** — ML pipelines for alpha-synuclein microscopy image analysis
-- 📄 **Published** joint second author in *EMBO Reports*
-- 🏔️ Can do a 360 on skis
+💡 &nbsp;I like to explore new technologies in AI/ML and build systems from scratch.\
+🎓 &nbsp;I'm a sophomore at Rutgers University double-majoring in Computer Science and Mathematics.\
+🔬 &nbsp;Researcher at the [Rail Lab](https://github.com/sunghoojung) (real-time CV for railroads) and [Kara Lab](https://github.com/eleannakara/Kara-Lab) (neurodegenerative disease research).\
+📄 &nbsp;Published joint second author in *EMBO Reports*.\
+🏢 &nbsp;Incoming SWE Intern at Gallatin AI (Summer 2026).\
+🏔️ &nbsp;Fun fact: I can do a 360 in freestyle skiing.\
+💬 &nbsp;Feel free to reach out for AI collaborations or just to chat.\
+✉️ &nbsp;You can reach me on Discord: **sunny17347**
 
 ---
 
-### ⚙️ Tech Stack
+### 🛠 &nbsp;Tech Stack
 
-<div align="center">
-
-**Languages**
-
-![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![C++](https://img.shields.io/badge/-C++-00599C?style=flat-square&logo=cplusplus&logoColor=white)
-![C](https://img.shields.io/badge/-C-A8B9CC?style=flat-square&logo=c&logoColor=black)
-![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![Haskell](https://img.shields.io/badge/-Haskell-5D4F85?style=flat-square&logo=haskell&logoColor=white)
-
-**ML / Data**
-
-![PyTorch](https://img.shields.io/badge/-PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
-![OpenCV](https://img.shields.io/badge/-OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white)
-![NumPy](https://img.shields.io/badge/-NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
-
-**Tools**
-
-![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
-![Linux](https://img.shields.io/badge/-Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Three.js](https://img.shields.io/badge/-Three.js-000?style=flat-square&logo=threedotjs&logoColor=white)
-
-</div>
+![Python](https://img.shields.io/badge/-Python-05122A?style=flat&logo=python)&nbsp;
+![C++](https://img.shields.io/badge/-C++-05122A?style=flat&logo=C%2B%2B&logoColor=00599C)&nbsp;
+![C](https://img.shields.io/badge/-C-05122A?style=flat&logo=C&logoColor=A8B9CC)&nbsp;
+![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)&nbsp;
+![TypeScript](https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript)&nbsp;
+![Haskell](https://img.shields.io/badge/-Haskell-05122A?style=flat&logo=haskell&logoColor=5D4F85)\
+![PyTorch](https://img.shields.io/badge/-PyTorch-05122A?style=flat&logo=pytorch)&nbsp;
+![OpenCV](https://img.shields.io/badge/-OpenCV-05122A?style=flat&logo=opencv&logoColor=5C3EE8)&nbsp;
+![NumPy](https://img.shields.io/badge/-NumPy-05122A?style=flat&logo=numpy&logoColor=013243)&nbsp;
+![Jupyter](https://img.shields.io/badge/-Jupyter-05122A?style=flat&logo=jupyter)\
+![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=react)&nbsp;
+![Node.js](https://img.shields.io/badge/-Node.js-05122A?style=flat&logo=node.js)&nbsp;
+![Three.js](https://img.shields.io/badge/-Three.js-05122A?style=flat&logo=threedotjs&logoColor=white)&nbsp;
+![HTML](https://img.shields.io/badge/-HTML-05122A?style=flat&logo=HTML5)&nbsp;
+![CSS](https://img.shields.io/badge/-CSS-05122A?style=flat&logo=CSS3&logoColor=1572B6)\
+![Git](https://img.shields.io/badge/-Git-05122A?style=flat&logo=git)&nbsp;
+![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)&nbsp;
+![Docker](https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker)&nbsp;
+![Linux](https://img.shields.io/badge/-Linux-05122A?style=flat&logo=linux&logoColor=FCC624)&nbsp;
+![CMake](https://img.shields.io/badge/-CMake-05122A?style=flat&logo=cmake&logoColor=064F8C)\
+![Visual Studio Code](https://img.shields.io/badge/-VS%20Code-05122A?style=flat&logo=visual-studio-code&logoColor=007ACC)&nbsp;
+![Arduino](https://img.shields.io/badge/-Arduino-05122A?style=flat&logo=arduino)
 
 ---
 
-### 📊 Stats
+### ⚙️ &nbsp;GitHub Analytics
 
-<div align="center">
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=sunghoojung&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=sunghoojung&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117)
-
-</div>
-
----
-
-### 🐍 Contribution Graph
-
-![Snake animation](https://raw.githubusercontent.com/sunghoojung/sunghoojung/output/github-snake-dark.svg)
+<p align="center">
+  <a href="https://github.com/sunghoojung">
+    <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=sunghoojung&show_icons=true&theme=algolia&include_all_commits=true&count_private=true"/>
+    <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=sunghoojung&layout=compact&langs_count=8&theme=algolia"/>
+  </a>
+</p>
 
 ---
 
-<div align="center">
+### 🤝🏻 &nbsp;Connect with Me
 
-*Currently looking for collaborators on AI projects — reach out on Discord: **sunny17347***
-
-</div>
+<p align="center">
+  <a href="https://linkedin.com/in/sunghoo-jung"><img src="https://img.shields.io/badge/-Sunghoo%20Jung-0077B5?style=flat&logo=Linkedin&logoColor=white"/></a>
+  <a href="mailto:sunghoojungg@gmail.com"><img src="https://img.shields.io/badge/-youremail@rutgers.edu-D14836?style=flat&logo=Gmail&logoColor=white"/></a>
+</p>
