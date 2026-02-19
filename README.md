@@ -57,5 +57,5 @@
 
 <p align="center">
   <a href="https://linkedin.com/in/sunghoo-jung"><img src="https://img.shields.io/badge/-Sunghoo%20Jung-0077B5?style=flat&logo=Linkedin&logoColor=white"/></a>
-  <a href="mailto:sunghoojungg@gmail.com"><img src="https://img.shields.io/badge/-youremail@rutgers.edu-D14836?style=flat&logo=Gmail&logoColor=white"/></a>
+  <a href="mailto:sunghoojungg@gmail.com"><img src="https://img.shields.io/badge/sunghoojungg@gmail.com-D14836?style=flat&logo=Gmail&logoColor=white"/></a>
 </p>
