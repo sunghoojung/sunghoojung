@@ -6,7 +6,7 @@
 
 💡 &nbsp;I like to explore new technologies in AI/ML and build systems from scratch.\
 🎓 &nbsp;I'm a sophomore at Rutgers University double-majoring in Computer Science and Mathematics.\
-🔬 &nbsp;Researcher at the [Rail Lab](https://github.com/sunghoojung) (real-time CV for railroads) and [Kara Lab](https://github.com/eleannakara/Kara-Lab) (neurodegenerative disease research).\
+🔬 &nbsp;Machine Learning Research Assistant at Rutgers Rail Lab (real-time CV for railroads).\
 📄 &nbsp;Published joint second author in *EMBO Reports*.\
 🏢 &nbsp;Incoming SWE Intern at Gallatin AI (Summer 2026).\
 🏔️ &nbsp;Fun fact: I can do a 360 in freestyle skiing.\
