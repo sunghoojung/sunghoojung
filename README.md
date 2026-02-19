@@ -2,7 +2,7 @@
 
 # Hey, I'm Sunghoo Jung 👋
 
-**CS + Math @ Rutgers University | ML Researcher
+CS + Math @ Rutgers University | ML Researcher
 
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sunghoo-jung/)
 [![Website](https://img.shields.io/badge/-Portfolio-000?style=for-the-badge&logo=vercel&logoColor=white)](https://sunghoojung.com)
