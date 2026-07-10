@@ -1,14 +1,6 @@
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:614385,100:516395&height=170&section=header&text=Sunghoo%20Jung&fontSize=44&fontColor=ffffff&animation=fadeIn&fontAlignY=38" width="100%"/>
-</p>
-
-<p align="center">CS + Math @ Rutgers</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/sunghoojung/sunghoojung/output/github-snake-dark.svg" width="100%"/>
-</p>
-
-<p align="center">
-  <a href="https://linkedin.com/in/sunghoo-jung">LinkedIn</a> ·
-  <a href="mailto:sunghoojungg@gmail.com">Email</a>
-</p>
+<a href="https://github.com/sunghoojung">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sunghoojung/sunghoojung/main/dark_mode.svg">
+    <img alt="Sunghoo Jung" src="https://raw.githubusercontent.com/sunghoojung/sunghoojung/main/light_mode.svg">
+  </picture>
+</a>
