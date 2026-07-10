@@ -12,7 +12,7 @@
 <path d="M1 15 a14 14 0 0 1 14 -14 h832 a14 14 0 0 1 14 14 v27 h-860 z" fill="#1a1b26"/>
 <line x1="1" y1="42" x2="861" y2="42" stroke="#2a2b3c" stroke-width="1"/>
 <circle cx="24" cy="21" r="6" fill="#ff5f56"/><circle cx="45" cy="21" r="6" fill="#ffbd2e"/><circle cx="66" cy="21" r="6" fill="#27c93f"/>
-<text x="431" y="26" text-anchor="middle" font-size="13" fill="#565f89">sunghoo@github: ~</text>
+<text x="431" y="26" text-anchor="middle" font-size="13" fill="#4b7d5c">sunghoo@github: ~</text>
 <g class="port2">
 <style>.port2{opacity:0;animation:portfade .7s ease forwards;}@keyframes portfade{to{opacity:1;}}</style>
 <g font-size="6.0" font-family="'JetBrains Mono','Fira Code',monospace" text-anchor="middle">
@@ -99,16 +99,16 @@
 </g>
 </g>
 <g font-size="15.5">
-<text class="ln" style="--d:.15s" x="436.0" y="70"><tspan fill="#7aa2f7" font-weight="700">sunghoo</tspan><tspan fill="#565f89">@</tspan><tspan fill="#bb9af7" font-weight="700">github</tspan><tspan class="caret" fill="#7aa2f7">&#9608;</tspan></text>
-<text class="ln" style="--d:.30s" x="436.0" y="97" fill="#3b4261">----------------------------------</text>
-<text class="ln" style="--d:0.42s" x="436.0" y="124"><tspan fill="#bb9af7" font-weight="700">School</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">Rutgers University (Sophomore)</tspan></text>
-<text class="ln" style="--d:0.55s" x="436.0" y="151"><tspan fill="#bb9af7" font-weight="700">Major</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">Computer Science + Mathematics</tspan></text>
-<text class="ln" style="--d:0.68s" x="436.0" y="178"><tspan fill="#bb9af7" font-weight="700">Focus</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">Machine Learning / Computer Vision</tspan></text>
-<text class="ln" style="--d:0.81s" x="436.0" y="205"><tspan fill="#bb9af7" font-weight="700">Lab</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">Rutgers Rail Lab — real-time CV</tspan></text>
-<text class="ln" style="--d:0.94s" x="436.0" y="232"><tspan fill="#bb9af7" font-weight="700">Next</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">SWE Intern @ Gallatin AI · Summer &#x27;26</tspan></text>
-<text class="ln" style="--d:1.07s" x="436.0" y="259"><tspan fill="#bb9af7" font-weight="700">Langs</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">Python, C++, TypeScript, Haskell</tspan></text>
-<text class="ln" style="--d:1.20s" x="436.0" y="286"><tspan fill="#bb9af7" font-weight="700">Tools</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">PyTorch, OpenCV, React, Docker</tspan></text>
-<text class="ln" style="--d:1.33s" x="436.0" y="313"><tspan fill="#bb9af7" font-weight="700">Contact</tspan><tspan fill="#565f89">: </tspan><tspan fill="#c0caf5">linkedin.com/in/sunghoo-jung</tspan></text>
-<g class="ln" style="--d:1.61s"><rect x="436.0" y="331" width="15" height="15" rx="3" fill="#414868"/><rect x="457.0" y="331" width="15" height="15" rx="3" fill="#f7768e"/><rect x="478.0" y="331" width="15" height="15" rx="3" fill="#9ece6a"/><rect x="499.0" y="331" width="15" height="15" rx="3" fill="#e0af68"/><rect x="520.0" y="331" width="15" height="15" rx="3" fill="#7aa2f7"/><rect x="541.0" y="331" width="15" height="15" rx="3" fill="#bb9af7"/><rect x="562.0" y="331" width="15" height="15" rx="3" fill="#7dcfff"/><rect x="583.0" y="331" width="15" height="15" rx="3" fill="#a9b1d6"/></g>
+<text class="ln" style="--d:.15s" x="436.0" y="70"><tspan fill="#7ee787" font-weight="700">sunghoo</tspan><tspan fill="#4b7d5c">@</tspan><tspan fill="#3fb950" font-weight="700">github</tspan><tspan class="caret" fill="#7ee787">&#9608;</tspan></text>
+<text class="ln" style="--d:.30s" x="436.0" y="97" fill="#1f4a2c">----------------------------------</text>
+<text class="ln" style="--d:0.42s" x="436.0" y="124"><tspan fill="#3fb950" font-weight="700">School</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">Rutgers University (Sophomore)</tspan></text>
+<text class="ln" style="--d:0.55s" x="436.0" y="151"><tspan fill="#3fb950" font-weight="700">Major</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">Computer Science + Mathematics</tspan></text>
+<text class="ln" style="--d:0.68s" x="436.0" y="178"><tspan fill="#3fb950" font-weight="700">Focus</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">Machine Learning / Computer Vision</tspan></text>
+<text class="ln" style="--d:0.81s" x="436.0" y="205"><tspan fill="#3fb950" font-weight="700">Lab</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">Rutgers Rail Lab — real-time CV</tspan></text>
+<text class="ln" style="--d:0.94s" x="436.0" y="232"><tspan fill="#3fb950" font-weight="700">Next</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">SWE Intern @ Gallatin AI · Summer &#x27;26</tspan></text>
+<text class="ln" style="--d:1.07s" x="436.0" y="259"><tspan fill="#3fb950" font-weight="700">Langs</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">Python, C++, TypeScript, Haskell</tspan></text>
+<text class="ln" style="--d:1.20s" x="436.0" y="286"><tspan fill="#3fb950" font-weight="700">Tools</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">PyTorch, OpenCV, React, Docker</tspan></text>
+<text class="ln" style="--d:1.33s" x="436.0" y="313"><tspan fill="#3fb950" font-weight="700">Contact</tspan><tspan fill="#4b7d5c">: </tspan><tspan fill="#9be8ac">linkedin.com/in/sunghoo-jung</tspan></text>
+<g class="ln" style="--d:1.61s"><rect x="436.0" y="331" width="15" height="15" rx="3" fill="#0e2a18"/><rect x="457.0" y="331" width="15" height="15" rx="3" fill="#14401f"/><rect x="478.0" y="331" width="15" height="15" rx="3" fill="#1a5a2a"/><rect x="499.0" y="331" width="15" height="15" rx="3" fill="#238636"/><rect x="520.0" y="331" width="15" height="15" rx="3" fill="#2ea043"/><rect x="541.0" y="331" width="15" height="15" rx="3" fill="#3fb950"/><rect x="562.0" y="331" width="15" height="15" rx="3" fill="#56d364"/><rect x="583.0" y="331" width="15" height="15" rx="3" fill="#7ee787"/></g>
 </g>
 </svg>
