@@ -1,7 +1,7 @@
 <a href="https://github.com/sunghoojung">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sunghoojung/sunghoojung/main/dark_mode.svg">
-    <img alt="Sunghoo Jung" src="https://raw.githubusercontent.com/sunghoojung/sunghoojung/main/light_mode.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="./dark_mode.svg">
+    <img alt="Sunghoo Jung" src="./light_mode.svg">
   </picture>
 </a>
 
