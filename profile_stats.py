@@ -159,30 +159,32 @@ def svg_escape(item: object) -> str:
     return html.escape(value(item), quote=True)
 
 
-VALUE_END = 1095
+PANEL_X = 390
+VALUE_END = 970
 CHAR_WIDTH = 9.3
 
 
 def svg_row(y: int, key: str, item: object) -> str:
     label = f". {key}:"
-    label_end = 436 + len(label) * CHAR_WIDTH
-    value_width = len(value(item)) * CHAR_WIDTH
+    label_end = PANEL_X + len(label) * CHAR_WIDTH
+    item_text = value(item)
+    value_start = VALUE_END - len(item_text) * CHAR_WIDTH
     dots_start = label_end + 8
-    dots_end = VALUE_END - value_width - 10
-    dots_width = max(26, dots_end - dots_start)
-    return "\n".join([
-        f'<text x="436" y="{y}" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">{html.escape(key)}</tspan><tspan>:</tspan></text>',
-        f'<text x="{dots_start:.1f}" y="{y}" class="andrew-cc" textLength="{dots_width:.1f}" lengthAdjust="spacing">....................</text>',
-        f'<text x="{VALUE_END}" y="{y}" text-anchor="end" class="andrew-value">{svg_escape(item)}</text>',
-    ])
+    dots_width = max(8, value_start - dots_start - 5)
+    return (
+        f'<tspan x="{PANEL_X}" y="{y}" class="andrew-cc">. </tspan>'
+        f'<tspan class="andrew-key">{html.escape(key)}</tspan><tspan>:</tspan>'
+        f'<tspan x="{dots_start:.1f}" class="andrew-cc" textLength="{dots_width:.1f}" lengthAdjust="spacing">....................</tspan>'
+        f'<tspan x="{value_start:.1f}" class="andrew-value">{svg_escape(item)}</tspan>'
+    )
 
 
 def section_row(y: int, title: str, text_color: str) -> str:
-    title_end = 436 + len(f"- {title} ") * CHAR_WIDTH
-    return "\n".join([
-        f'<text x="436" y="{y}" fill="{text_color}">- {html.escape(title)}</text>',
-        f'<text x="{title_end:.1f}" y="{y}" class="andrew-cc" textLength="{VALUE_END - title_end:.1f}" lengthAdjust="spacing">------------------------------------</text>',
-    ])
+    title_end = PANEL_X + len(f"- {title} ") * CHAR_WIDTH
+    return (
+        f'<tspan x="{PANEL_X}" y="{y}">- {html.escape(title)} </tspan>'
+        f'<tspan class="andrew-cc" textLength="{VALUE_END - title_end:.1f}" lengthAdjust="spacing">------------------------------------</tspan>'
+    )
 
 
 def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> str:
@@ -198,56 +200,72 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
         key = "#953800"
         val = "#0a3069"
         cc = "#c2cfde"
-    if '<g font-size="15.5">' in source:
-        prefix = source.split('<g font-size="15.5">', 1)[0]
-    else:
-        prefix = source.split('<text x="436" y="30"', 1)[0]
-    prefix = prefix.replace('width="862" height="486" viewBox="0 0 862 486"', 'width="1120" height="530" viewBox="0 0 1120 530"')
-    prefix = prefix.replace('width="860" height="484"', 'width="1118" height="528"')
-    prefix = prefix.replace('h832', 'h1090').replace('h-860', 'h-1118').replace('x2="861"', 'x2="1119"')
-    prefix = prefix.replace("font-family=\"'JetBrains Mono','Fira Code',ui-monospace,'SFMono-Regular',Menlo,monospace\"", 'font-family="ConsolasFallback,Consolas,monospace"')
-    prefix = "\n".join(line for line in prefix.splitlines() if "sunghoo@github: ~" not in line)
-    if ".andrew-key" not in prefix:
-        prefix = prefix.replace(
-            "<style>\n",
-            "<style>\n@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }\n"
-            f".andrew-key {{fill: {key};}} .andrew-value {{fill: {val};}} .andrew-add {{fill: #3fb950;}} .andrew-del {{fill: #f85149;}} .andrew-cc {{fill: {cc};}} text, tspan {{white-space: pre;}}\n",
-            1,
-        )
+    face_start = source.index('<g class="port2"')
+    panel_start = source.index('<g font-size="15.5">', face_start)
+    face_group = source[face_start:panel_start].replace(
+        '<g class="port2">',
+        '<g class="port2" transform="translate(-35 0)">',
+    ).replace(
+        ".port2{opacity:0;animation:portfade .7s ease forwards;}@keyframes portfade{to{opacity:1;}}",
+        ".port2{opacity:1;}",
+    )
+    prefix = "\n".join([
+        "<?xml version='1.0' encoding='UTF-8'?>",
+        '<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="530px" font-size="16px">',
+        "<style>",
+        "@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }",
+        f".andrew-key {{fill: {key};}} .andrew-value {{fill: {val};}} .andrew-add {{fill: #3fb950;}} .andrew-del {{fill: #f85149;}} .andrew-cc {{fill: {cc};}} text, tspan {{white-space: pre;}}",
+        "</style>",
+        f'<rect width="985px" height="530px" fill="{background}" rx="15"/>',
+        face_group,
+    ])
     rows = [
-        svg_row(70, "OS", OS),
-        svg_row(90, "Uptime", age(today)),
-        svg_row(110, "Host", "Rutgers University"),
+        svg_row(50, "OS", OS),
+        svg_row(70, "Uptime", age(today)),
+        svg_row(90, "Host", "Rutgers University"),
         svg_row(130, "IDE", "Cursor"),
         svg_row(170, "Languages.Programming", "Python, Go Lang"),
-        svg_row(190, "Languages.Real", "English"),
-        svg_row(230, "Hobbies.Software", "CV, ML, Web Apps"),
-        svg_row(250, "Hobbies.Personal", "Robotics"),
-        section_row(290, "Contact", text),
-        svg_row(310, "Email.Personal", "sunghoojungg@gmail.com"),
-        svg_row(330, "LinkedIn", "sunghoojung"),
-        svg_row(350, "Discord", "sunny17347"),
-        section_row(390, "GitHub Stats", text),
-        (f'<text x="436" y="410" class="andrew-cc">. <tspan class="andrew-key">Repos</tspan>: ....</text>'
-         f'<text x="650" y="410" text-anchor="end" class="andrew-value">{svg_escape(stats["repos"])}</text>'
-         f'<text x="670" y="410" class="andrew-cc">&#123;<tspan class="andrew-key">Contributed</tspan>: </text>'
-         f'<text x="835" y="410" text-anchor="end" class="andrew-value">{svg_escape(stats["contributed"])}</text>'
-         f'<text x="850" y="410" class="andrew-cc">&#125; | <tspan class="andrew-key">Stars</tspan>: ............</text>'
-         f'<text x="{VALUE_END}" y="410" text-anchor="end" class="andrew-value">{svg_escape(stats["stars"])}</text>'),
-        (f'<text x="436" y="430" class="andrew-cc">. <tspan class="andrew-key">Commits</tspan>: ................</text>'
-         f'<text x="760" y="430" text-anchor="end" class="andrew-value">{svg_escape(stats["commits"])}</text>'
-         f'<text x="780" y="430" class="andrew-cc">| <tspan class="andrew-key">Followers</tspan>: ........</text>'
-         f'<text x="{VALUE_END}" y="430" text-anchor="end" class="andrew-value">{svg_escape(stats["followers"])}</text>'),
-        (f'<text x="436" y="450" class="andrew-cc">. <tspan class="andrew-key">Lines of Code on GitHub</tspan>: </text>'
-         f'<text x="805" y="450" text-anchor="end" class="andrew-value">{svg_escape(stats["loc_net"])}</text>'
-         f'<text x="820" y="450" class="andrew-cc">( </text><text x="950" y="450" text-anchor="end" class="andrew-add">{svg_escape(stats["loc_added"])}++</text>'
-         f'<text x="960" y="450" class="andrew-cc">, </text><text x="1085" y="450" text-anchor="end" class="andrew-del">{svg_escape(stats["loc_deleted"])}--</text><text x="1095" y="450" class="andrew-cc"> )</text>'),
+        svg_row(210, "Languages.Real", "English"),
+        svg_row(250, "Hobbies.Software", "CV, ML, Web Apps"),
+        svg_row(270, "Hobbies.Personal", "Robotics"),
+        section_row(310, "Contact", text),
+        svg_row(330, "Email.Personal", "sunghoojungg@gmail.com"),
+        svg_row(350, "LinkedIn", "sunghoojung"),
+        svg_row(370, "Discord", "sunny17347"),
+        section_row(450, "GitHub Stats", text),
+        (f'<tspan x="{PANEL_X}" y="470" class="andrew-cc">. </tspan><tspan class="andrew-key">Repos</tspan><tspan>:</tspan><tspan class="andrew-cc"> ....</tspan>'
+         f'<tspan x="{590 - len(value(stats["repos"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["repos"])}</tspan>'
+         f'<tspan x="610" class="andrew-cc"> &#123;</tspan><tspan class="andrew-key">Contributed</tspan><tspan>: </tspan>'
+         f'<tspan x="{775 - len(value(stats["contributed"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["contributed"])}</tspan>'
+         f'<tspan x="790" class="andrew-cc"> &#125; | </tspan><tspan class="andrew-key">Stars</tspan><tspan>:</tspan>'
+         f'<tspan x="{790 + len(" } | Stars:") * CHAR_WIDTH:.1f}" class="andrew-cc" textLength="{max(8, VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH - (790 + len(" } | Stars:") * CHAR_WIDTH) - 2):.1f}" lengthAdjust="spacing">....................</tspan>'
+         f'<tspan x="{VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["stars"])}</tspan>'),
+        (f'<tspan x="{PANEL_X}" y="490" class="andrew-cc">. </tspan><tspan class="andrew-key">Commits</tspan><tspan>: ................</tspan>'
+         f'<tspan x="{700 - len(value(stats["commits"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["commits"])}</tspan>'
+         f'<tspan x="720" class="andrew-cc"> | </tspan><tspan class="andrew-key">Followers</tspan><tspan>:</tspan>'
+         f'<tspan x="{720 + len(" | Followers:") * CHAR_WIDTH:.1f}" class="andrew-cc" textLength="{max(8, VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH - (720 + len(" | Followers:") * CHAR_WIDTH) - 2):.1f}" lengthAdjust="spacing">....................</tspan>'
+         f'<tspan x="{VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["followers"])}</tspan>'),
     ]
+    loc_close_x = 960
+    loc_deleted_end = loc_close_x - 10
+    loc_deleted_start = loc_deleted_end - (len(value(stats["loc_deleted"])) + 2) * CHAR_WIDTH
+    loc_comma_x = loc_deleted_start - 18
+    loc_added_end = loc_comma_x - 8
+    loc_added_start = loc_added_end - (len(value(stats["loc_added"])) + 2) * CHAR_WIDTH
+    loc_open_x = loc_added_start - 20
+    loc_net_end = loc_open_x - 8
+    loc_net_start = loc_net_end - len(value(stats["loc_net"])) * CHAR_WIDTH
+    rows.append(
+        f'<tspan x="{PANEL_X}" y="510" class="andrew-cc">. </tspan><tspan class="andrew-key">Lines of Code on GitHub</tspan><tspan>:</tspan>'
+        f'<tspan class="andrew-cc">. </tspan><tspan x="{loc_net_start:.1f}" class="andrew-value">{svg_escape(stats["loc_net"])}</tspan>'
+        f'<tspan x="{loc_open_x:.1f}" class="andrew-cc"> ( </tspan><tspan x="{loc_added_start:.1f}" class="andrew-add">{svg_escape(stats["loc_added"])}++</tspan>'
+        f'<tspan x="{loc_comma_x:.1f}" class="andrew-cc">, </tspan><tspan x="{loc_deleted_start:.1f}" class="andrew-del">{svg_escape(stats["loc_deleted"])}--</tspan><tspan x="{loc_close_x}" class="andrew-cc"> )</tspan>'
+    )
     panel = "\n".join([
         '<g font-size="15.5">',
-        f'<text x="436" y="30" fill="{text}"><tspan x="436" y="30">sunghoo@github</tspan> -{"-" * 59}-</text>',
+        f'<text x="{PANEL_X}" y="30" fill="{text}"><tspan x="{PANEL_X}" y="30">sunghoo@github</tspan><tspan x="{PANEL_X + len("sunghoo@github") * CHAR_WIDTH + 8:.1f}" class="andrew-cc" textLength="{VALUE_END - (PANEL_X + len("sunghoo@github") * CHAR_WIDTH + 8):.1f}" lengthAdjust="spacing">------------------------------------------------</tspan>',
         *rows,
-        f'<text x="436" y="500" class="andrew-cc">Updated {today.isoformat()}</text>',
+        "</text>",
         "</g>",
     ])
     return prefix + panel + "\n</svg>\n"
