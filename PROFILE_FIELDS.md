@@ -7,7 +7,7 @@ Banner: Sunghoo at GitHub
 OS: macOS 26.4
 Uptime: calculated from July 30, 2006
 Host: Rutgers University
-IDE: Cursor
+IDE: VSCode 1.125.1
 Languages.Programming: Python, JS, TS, Golang, C, C++
 Languages.Speak: English, Korean
 Hobbies.Software: CV, ML, Web Apps

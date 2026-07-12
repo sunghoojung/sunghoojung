@@ -225,7 +225,7 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
         svg_row(50, "OS", OS),
         svg_row(70, "Uptime", age(today)),
         svg_row(90, "Host", "Rutgers University"),
-        svg_row(130, "IDE", "Cursor"),
+        svg_row(130, "IDE", "VSCode 1.125.1"),
         svg_row(170, "Languages.Programming", "Python, JS, TS, Golang, C, C++"),
         svg_row(210, "Languages.Speak", "English, Korean"),
         svg_row(250, "Hobbies.Software", "CV, ML, Web Apps"),
