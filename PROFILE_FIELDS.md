@@ -8,12 +8,12 @@ OS: macOS 26.4
 Uptime: calculated from July 30, 2006
 Host: Rutgers University
 IDE: Cursor
-Languages.Programming: Python, Go Lang
-Languages.Real: English
+Languages.Programming: Python, JS, TS, Golang, C, C++
+Languages.Speak: English, Korean
 Hobbies.Software: CV, ML, Web Apps
 Hobbies.Personal: Robotics
 Email.Personal: sunghoojungg@gmail.com
-LinkedIn: sunghoojung
+LinkedIn: sunghoo-jung
 Discord: sunny17347
 ```
 
