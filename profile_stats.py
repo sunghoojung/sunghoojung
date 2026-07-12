@@ -159,12 +159,30 @@ def svg_escape(item: object) -> str:
     return html.escape(value(item), quote=True)
 
 
-def svg_row(y: int, key: str, item: object, width: int = 66) -> str:
-    item_text = value(item)
-    dots = "." * max(5, width - len(f". {key}: ") - len(item_text))
-    return (f'<tspan x="436" y="{y}" class="andrew-cc">. </tspan>'
-            f'<tspan class="andrew-key">{html.escape(key)}</tspan><tspan class="andrew-cc">: {dots} </tspan>'
-            f'<tspan class="andrew-value">{svg_escape(item)}</tspan>')
+VALUE_END = 1095
+CHAR_WIDTH = 9.3
+
+
+def svg_row(y: int, key: str, item: object) -> str:
+    label = f". {key}:"
+    label_end = 436 + len(label) * CHAR_WIDTH
+    value_width = len(value(item)) * CHAR_WIDTH
+    dots_start = label_end + 8
+    dots_end = VALUE_END - value_width - 10
+    dots_width = max(26, dots_end - dots_start)
+    return "\n".join([
+        f'<text x="436" y="{y}" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">{html.escape(key)}</tspan><tspan>:</tspan></text>',
+        f'<text x="{dots_start:.1f}" y="{y}" class="andrew-cc" textLength="{dots_width:.1f}" lengthAdjust="spacing">....................</text>',
+        f'<text x="{VALUE_END}" y="{y}" text-anchor="end" class="andrew-value">{svg_escape(item)}</text>',
+    ])
+
+
+def section_row(y: int, title: str, text_color: str) -> str:
+    title_end = 436 + len(f"- {title} ") * CHAR_WIDTH
+    return "\n".join([
+        f'<text x="436" y="{y}" fill="{text_color}">- {html.escape(title)}</text>',
+        f'<text x="{title_end:.1f}" y="{y}" class="andrew-cc" textLength="{VALUE_END - title_end:.1f}" lengthAdjust="spacing">------------------------------------</text>',
+    ])
 
 
 def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> str:
@@ -205,30 +223,31 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
         svg_row(190, "Languages.Real", "English"),
         svg_row(230, "Hobbies.Software", "CV, ML, Web Apps"),
         svg_row(250, "Hobbies.Personal", "Robotics"),
-        f'<tspan x="436" y="290">- Contact</tspan> -{"-" * 61}',
+        section_row(290, "Contact", text),
         svg_row(310, "Email.Personal", "sunghoojungg@gmail.com"),
         svg_row(330, "LinkedIn", "sunghoojung"),
         svg_row(350, "Discord", "sunny17347"),
-        f'<tspan x="436" y="390">- GitHub Stats</tspan> -{"-" * 54}',
-        (f'<tspan x="436" y="410" class="andrew-cc">. </tspan><tspan class="andrew-key">Repos</tspan>'
-         f'<tspan class="andrew-cc">: .... </tspan><tspan class="andrew-value">{svg_escape(stats["repos"])}</tspan>'
-         f' &#123;<tspan class="andrew-key">Contributed</tspan>: <tspan class="andrew-value">{svg_escape(stats["contributed"])}</tspan>&#125; | '
-         f'<tspan class="andrew-key">Stars</tspan>:<tspan class="andrew-cc"> ............ </tspan><tspan class="andrew-value">{svg_escape(stats["stars"])}</tspan>'),
-        (f'<tspan x="436" y="430" class="andrew-cc">. </tspan><tspan class="andrew-key">Commits</tspan>'
-         f'<tspan class="andrew-cc">: ................ </tspan><tspan class="andrew-value">{svg_escape(stats["commits"])}</tspan> | '
-         f'<tspan class="andrew-key">Followers</tspan>:<tspan class="andrew-cc"> ........ </tspan><tspan class="andrew-value">{svg_escape(stats["followers"])}</tspan>'),
-        (f'<tspan x="436" y="450" class="andrew-cc">. </tspan><tspan class="andrew-key">Lines of Code on GitHub</tspan>'
-         f'<tspan class="andrew-cc">: </tspan><tspan class="andrew-value">{svg_escape(stats["loc_net"])}</tspan> ( '
-         f'<tspan class="andrew-add">{svg_escape(stats["loc_added"])}++</tspan>, '
-         f'<tspan class="andrew-del">{svg_escape(stats["loc_deleted"])}--</tspan> )'),
+        section_row(390, "GitHub Stats", text),
+        (f'<text x="436" y="410" class="andrew-cc">. <tspan class="andrew-key">Repos</tspan>: ....</text>'
+         f'<text x="650" y="410" text-anchor="end" class="andrew-value">{svg_escape(stats["repos"])}</text>'
+         f'<text x="670" y="410" class="andrew-cc">&#123;<tspan class="andrew-key">Contributed</tspan>: </text>'
+         f'<text x="835" y="410" text-anchor="end" class="andrew-value">{svg_escape(stats["contributed"])}</text>'
+         f'<text x="850" y="410" class="andrew-cc">&#125; | <tspan class="andrew-key">Stars</tspan>: ............</text>'
+         f'<text x="{VALUE_END}" y="410" text-anchor="end" class="andrew-value">{svg_escape(stats["stars"])}</text>'),
+        (f'<text x="436" y="430" class="andrew-cc">. <tspan class="andrew-key">Commits</tspan>: ................</text>'
+         f'<text x="760" y="430" text-anchor="end" class="andrew-value">{svg_escape(stats["commits"])}</text>'
+         f'<text x="780" y="430" class="andrew-cc">| <tspan class="andrew-key">Followers</tspan>: ........</text>'
+         f'<text x="{VALUE_END}" y="430" text-anchor="end" class="andrew-value">{svg_escape(stats["followers"])}</text>'),
+        (f'<text x="436" y="450" class="andrew-cc">. <tspan class="andrew-key">Lines of Code on GitHub</tspan>: </text>'
+         f'<text x="805" y="450" text-anchor="end" class="andrew-value">{svg_escape(stats["loc_net"])}</text>'
+         f'<text x="820" y="450" class="andrew-cc">( </text><text x="950" y="450" text-anchor="end" class="andrew-add">{svg_escape(stats["loc_added"])}++</text>'
+         f'<text x="960" y="450" class="andrew-cc">, </text><text x="1085" y="450" text-anchor="end" class="andrew-del">{svg_escape(stats["loc_deleted"])}--</text><text x="1095" y="450" class="andrew-cc"> )</text>'),
     ]
     panel = "\n".join([
         '<g font-size="15.5">',
         f'<text x="436" y="30" fill="{text}"><tspan x="436" y="30">sunghoo@github</tspan> -{"-" * 59}-</text>',
-        f'<text x="436" y="30" fill="{text}">',
         *rows,
-        f'<tspan x="436" y="500" class="andrew-cc">Updated {today.isoformat()}</tspan>',
-        "</text>",
+        f'<text x="436" y="500" class="andrew-cc">Updated {today.isoformat()}</text>',
         "</g>",
     ])
     return prefix + panel + "\n</svg>\n"

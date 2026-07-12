@@ -100,24 +100,46 @@
 </g>
 </g><g font-size="15.5">
 <text x="436" y="30" fill="#24292f"><tspan x="436" y="30">sunghoo@github</tspan> -------------------------------------------------------------</text>
-<text x="436" y="30" fill="#24292f">
-<tspan x="436" y="70" class="andrew-cc">. </tspan><tspan class="andrew-key">OS</tspan><tspan class="andrew-cc">: .................................................. </tspan><tspan class="andrew-value">macOS 26.4</tspan>
-<tspan x="436" y="90" class="andrew-cc">. </tspan><tspan class="andrew-key">Uptime</tspan><tspan class="andrew-cc">: ............................ </tspan><tspan class="andrew-value">19 years, 11 months, 12 days</tspan>
-<tspan x="436" y="110" class="andrew-cc">. </tspan><tspan class="andrew-key">Host</tspan><tspan class="andrew-cc">: ........................................ </tspan><tspan class="andrew-value">Rutgers University</tspan>
-<tspan x="436" y="130" class="andrew-cc">. </tspan><tspan class="andrew-key">IDE</tspan><tspan class="andrew-cc">: ..................................................... </tspan><tspan class="andrew-value">Cursor</tspan>
-<tspan x="436" y="170" class="andrew-cc">. </tspan><tspan class="andrew-key">Languages.Programming</tspan><tspan class="andrew-cc">: .......................... </tspan><tspan class="andrew-value">Python, Go Lang</tspan>
-<tspan x="436" y="190" class="andrew-cc">. </tspan><tspan class="andrew-key">Languages.Real</tspan><tspan class="andrew-cc">: ......................................... </tspan><tspan class="andrew-value">English</tspan>
-<tspan x="436" y="230" class="andrew-cc">. </tspan><tspan class="andrew-key">Hobbies.Software</tspan><tspan class="andrew-cc">: .............................. </tspan><tspan class="andrew-value">CV, ML, Web Apps</tspan>
-<tspan x="436" y="250" class="andrew-cc">. </tspan><tspan class="andrew-key">Hobbies.Personal</tspan><tspan class="andrew-cc">: ...................................... </tspan><tspan class="andrew-value">Robotics</tspan>
-<tspan x="436" y="290">- Contact</tspan> --------------------------------------------------------------
-<tspan x="436" y="310" class="andrew-cc">. </tspan><tspan class="andrew-key">Email.Personal</tspan><tspan class="andrew-cc">: .......................... </tspan><tspan class="andrew-value">sunghoojungg@gmail.com</tspan>
-<tspan x="436" y="330" class="andrew-cc">. </tspan><tspan class="andrew-key">LinkedIn</tspan><tspan class="andrew-cc">: ........................................... </tspan><tspan class="andrew-value">sunghoojung</tspan>
-<tspan x="436" y="350" class="andrew-cc">. </tspan><tspan class="andrew-key">Discord</tspan><tspan class="andrew-cc">: ............................................. </tspan><tspan class="andrew-value">sunny17347</tspan>
-<tspan x="436" y="390">- GitHub Stats</tspan> -------------------------------------------------------
-<tspan x="436" y="410" class="andrew-cc">. </tspan><tspan class="andrew-key">Repos</tspan><tspan class="andrew-cc">: .... </tspan><tspan class="andrew-value">45</tspan> &#123;<tspan class="andrew-key">Contributed</tspan>: <tspan class="andrew-value">66</tspan>&#125; | <tspan class="andrew-key">Stars</tspan>:<tspan class="andrew-cc"> ............ </tspan><tspan class="andrew-value">12</tspan>
-<tspan x="436" y="430" class="andrew-cc">. </tspan><tspan class="andrew-key">Commits</tspan><tspan class="andrew-cc">: ................ </tspan><tspan class="andrew-value">255</tspan> | <tspan class="andrew-key">Followers</tspan>:<tspan class="andrew-cc"> ........ </tspan><tspan class="andrew-value">10</tspan>
-<tspan x="436" y="450" class="andrew-cc">. </tspan><tspan class="andrew-key">Lines of Code on GitHub</tspan><tspan class="andrew-cc">: </tspan><tspan class="andrew-value">4,574,492</tspan> ( <tspan class="andrew-add">4,841,242++</tspan>, <tspan class="andrew-del">266,750--</tspan> )
-<tspan x="436" y="500" class="andrew-cc">Updated 2026-07-12</tspan>
-</text>
+<text x="436" y="70" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">OS</tspan><tspan>:</tspan></text>
+<text x="490.5" y="70" class="andrew-cc" textLength="501.5" lengthAdjust="spacing">....................</text>
+<text x="1095" y="70" text-anchor="end" class="andrew-value">macOS 26.4</text>
+<text x="436" y="90" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Uptime</tspan><tspan>:</tspan></text>
+<text x="527.7" y="90" class="andrew-cc" textLength="296.9" lengthAdjust="spacing">....................</text>
+<text x="1095" y="90" text-anchor="end" class="andrew-value">19 years, 11 months, 12 days</text>
+<text x="436" y="110" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Host</tspan><tspan>:</tspan></text>
+<text x="509.1" y="110" class="andrew-cc" textLength="408.5" lengthAdjust="spacing">....................</text>
+<text x="1095" y="110" text-anchor="end" class="andrew-value">Rutgers University</text>
+<text x="436" y="130" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">IDE</tspan><tspan>:</tspan></text>
+<text x="499.8" y="130" class="andrew-cc" textLength="529.4" lengthAdjust="spacing">....................</text>
+<text x="1095" y="130" text-anchor="end" class="andrew-value">Cursor</text>
+<text x="436" y="170" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Languages.Programming</tspan><tspan>:</tspan></text>
+<text x="667.2" y="170" class="andrew-cc" textLength="278.3" lengthAdjust="spacing">....................</text>
+<text x="1095" y="170" text-anchor="end" class="andrew-value">Python, Go Lang</text>
+<text x="436" y="190" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Languages.Real</tspan><tspan>:</tspan></text>
+<text x="602.1" y="190" class="andrew-cc" textLength="417.8" lengthAdjust="spacing">....................</text>
+<text x="1095" y="190" text-anchor="end" class="andrew-value">English</text>
+<text x="436" y="230" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Hobbies.Software</tspan><tspan>:</tspan></text>
+<text x="620.7" y="230" class="andrew-cc" textLength="315.5" lengthAdjust="spacing">....................</text>
+<text x="1095" y="230" text-anchor="end" class="andrew-value">CV, ML, Web Apps</text>
+<text x="436" y="250" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Hobbies.Personal</tspan><tspan>:</tspan></text>
+<text x="620.7" y="250" class="andrew-cc" textLength="389.9" lengthAdjust="spacing">....................</text>
+<text x="1095" y="250" text-anchor="end" class="andrew-value">Robotics</text>
+<text x="436" y="290" fill="#24292f">- Contact</text>
+<text x="529.0" y="290" class="andrew-cc" textLength="566.0" lengthAdjust="spacing">------------------------------------</text>
+<text x="436" y="310" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Email.Personal</tspan><tspan>:</tspan></text>
+<text x="602.1" y="310" class="andrew-cc" textLength="278.3" lengthAdjust="spacing">....................</text>
+<text x="1095" y="310" text-anchor="end" class="andrew-value">sunghoojungg@gmail.com</text>
+<text x="436" y="330" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">LinkedIn</tspan><tspan>:</tspan></text>
+<text x="546.3" y="330" class="andrew-cc" textLength="436.4" lengthAdjust="spacing">....................</text>
+<text x="1095" y="330" text-anchor="end" class="andrew-value">sunghoojung</text>
+<text x="436" y="350" class="andrew-cc"><tspan>. </tspan><tspan class="andrew-key">Discord</tspan><tspan>:</tspan></text>
+<text x="537.0" y="350" class="andrew-cc" textLength="455.0" lengthAdjust="spacing">....................</text>
+<text x="1095" y="350" text-anchor="end" class="andrew-value">sunny17347</text>
+<text x="436" y="390" fill="#24292f">- GitHub Stats</text>
+<text x="575.5" y="390" class="andrew-cc" textLength="519.5" lengthAdjust="spacing">------------------------------------</text>
+<text x="436" y="410" class="andrew-cc">. <tspan class="andrew-key">Repos</tspan>: ....</text><text x="650" y="410" text-anchor="end" class="andrew-value">45</text><text x="670" y="410" class="andrew-cc">&#123;<tspan class="andrew-key">Contributed</tspan>: </text><text x="835" y="410" text-anchor="end" class="andrew-value">66</text><text x="850" y="410" class="andrew-cc">&#125; | <tspan class="andrew-key">Stars</tspan>: ............</text><text x="1095" y="410" text-anchor="end" class="andrew-value">12</text>
+<text x="436" y="430" class="andrew-cc">. <tspan class="andrew-key">Commits</tspan>: ................</text><text x="760" y="430" text-anchor="end" class="andrew-value">255</text><text x="780" y="430" class="andrew-cc">| <tspan class="andrew-key">Followers</tspan>: ........</text><text x="1095" y="430" text-anchor="end" class="andrew-value">10</text>
+<text x="436" y="450" class="andrew-cc">. <tspan class="andrew-key">Lines of Code on GitHub</tspan>: </text><text x="805" y="450" text-anchor="end" class="andrew-value">4,574,492</text><text x="820" y="450" class="andrew-cc">( </text><text x="950" y="450" text-anchor="end" class="andrew-add">4,841,242++</text><text x="960" y="450" class="andrew-cc">, </text><text x="1085" y="450" text-anchor="end" class="andrew-del">266,750--</text><text x="1095" y="450" class="andrew-cc"> )</text>
+<text x="436" y="500" class="andrew-cc">Updated 2026-07-12</text>
 </g>
 </svg>
