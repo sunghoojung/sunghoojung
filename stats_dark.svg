@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430">
+<rect x="1" y="1" width="1118" height="428" rx="14" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+<path d="M1 15a14 14 0 0 1 14-14h1090a14 14 0 0 1 14 14v35H1z" fill="#0d1117"/>
+<line x1="1" y1="50" x2="1119" y2="50" stroke="#30363d"/>
+<circle cx="25" cy="26" r="6" fill="#ff5f56"/><circle cx="46" cy="26" r="6" fill="#ffbd2e"/><circle cx="67" cy="26" r="6" fill="#27c93f"/>
+<text x="560" y="31" text-anchor="middle" font-family="monospace" font-size="14" fill="#7ee787" font-weight="700">Sunghoo at GitHub</text>
+<text x="40" y="82" font-family="monospace" font-size="17" fill="#7ee787" font-weight="700">profile</text>
+<text x="40" y="103" font-family="monospace" font-size="14" fill="#8b949e">------------------------------------</text>
+<text x="590" y="82" font-family="monospace" font-size="17" fill="#7ee787" font-weight="700">GitHub Stats</text>
+<text x="590" y="103" font-family="monospace" font-size="14" fill="#8b949e">------------------------------------</text>
+<text x="40" y="137" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">OS</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">macOS 26.4</tspan></text>
+<text x="40" y="170" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Uptime</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">19 years, 11 months, 12 days</tspan></text>
+<text x="40" y="203" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Host</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">Rutgers University</tspan></text>
+<text x="40" y="236" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">IDE</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">Cursor</tspan></text>
+<text x="40" y="269" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Languages.Real</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">English</tspan></text>
+<text x="40" y="302" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Hobbies.Software</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">CV, ML, Web Apps</tspan></text>
+<text x="40" y="335" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Hobbies.Personal</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">Robotics</tspan></text>
+<text x="590" y="137" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Repos</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">45</tspan></text>
+<text x="590" y="170" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Contributed</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">66</tspan></text>
+<text x="590" y="203" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Stars</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">12</tspan></text>
+<text x="590" y="236" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Commits</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">254</tspan></text>
+<text x="590" y="269" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">Followers</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">10</tspan></text>
+<text x="590" y="302" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">LOC Added</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">4,841,242</tspan></text>
+<text x="590" y="335" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">LOC Deleted</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">266,750</tspan></text>
+<text x="590" y="368" font-family="monospace" font-size="16"><tspan fill="#7ee787" font-weight="700">LOC Net</tspan><tspan fill="#8b949e">: </tspan><tspan fill="#c9d1d9">4,574,492</tspan></text>
+<text x="40" y="398" font-family="monospace" font-size="12" fill="#8b949e">Updated 2026-07-12 | Add PROFILE_STATS_TOKEN for full contributed and LOC data</text>
+</svg>
