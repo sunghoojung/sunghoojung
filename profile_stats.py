@@ -159,10 +159,52 @@ def esc(item: object) -> str:
     return html.escape(value(item), quote=True)
 
 
-def line(x: int, y: int, key: str, item: object, key_color: str, muted: str, value_color: str) -> str:
-    return (f'<text x="{x}" y="{y}" font-family="monospace" font-size="16">'
+def leader_row(y: int, key: str, item: object, key_color: str, muted: str, value_color: str) -> str:
+    value_text = value(item)
+    prefix_length = len(f". {key}: ")
+    dots = "." * max(5, 92 - prefix_length - len(value_text))
+    return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
+            f'<tspan fill="{muted}">. </tspan>'
             f'<tspan fill="{key_color}" font-weight="700">{html.escape(key)}</tspan>'
-            f'<tspan fill="{muted}">: </tspan><tspan fill="{value_color}">{esc(item)}</tspan></text>')
+            f'<tspan fill="{muted}">: {dots} </tspan>'
+            f'<tspan fill="{value_color}">{esc(item)}</tspan></text>')
+
+
+def section_row(y: int, title: str, green: str, muted: str) -> str:
+    return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
+            f'<tspan fill="{green}" font-weight="700">- {html.escape(title)} </tspan>'
+            f'<tspan fill="{muted}">{"-" * 82}</tspan></text>')
+
+
+def stats_row(y: int, stats: dict, muted: str, green: str, value_color: str) -> str:
+    repos = esc(stats["repos"])
+    contributed = esc(stats["contributed"])
+    stars = esc(stats["stars"])
+    commits = esc(stats["commits"])
+    followers = esc(stats["followers"])
+    added = esc(stats["loc_added"])
+    deleted = esc(stats["loc_deleted"])
+    net = esc(stats["loc_net"])
+    if y == 568:
+        return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
+                f'<tspan fill="{muted}">. </tspan><tspan fill="{green}" font-weight="700">Repos</tspan>'
+                f'<tspan fill="{muted}">: .... </tspan><tspan fill="{value_color}">{repos}</tspan>'
+                f'<tspan fill="{muted}"> &#123;</tspan><tspan fill="{green}" font-weight="700">Contributed</tspan>'
+                f'<tspan fill="{muted}">: </tspan><tspan fill="{value_color}">{contributed}</tspan>'
+                f'<tspan fill="{muted}">&#125; | </tspan><tspan fill="{green}" font-weight="700">Stars</tspan>'
+                f'<tspan fill="{muted}">: ............ </tspan><tspan fill="{value_color}">{stars}</tspan></text>')
+    if y == 599:
+        return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
+                f'<tspan fill="{muted}">. </tspan><tspan fill="{green}" font-weight="700">Commits</tspan>'
+                f'<tspan fill="{muted}">: ................ </tspan><tspan fill="{value_color}">{commits}</tspan>'
+                f'<tspan fill="{muted}"> | </tspan><tspan fill="{green}" font-weight="700">Followers</tspan>'
+                f'<tspan fill="{muted}">: ........ </tspan><tspan fill="{value_color}">{followers}</tspan></text>')
+    return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
+            f'<tspan fill="{muted}">. </tspan><tspan fill="{green}" font-weight="700">Lines of Code on GitHub</tspan>'
+            f'<tspan fill="{muted}">: </tspan><tspan fill="{value_color}">{net}</tspan>'
+            f'<tspan fill="{muted}"> ( </tspan><tspan fill="#3fb950">{added}++</tspan>'
+            f'<tspan fill="{muted}">, </tspan><tspan fill="#f85149">{deleted}--</tspan>'
+            f'<tspan fill="{muted}"> )</tspan></text>')
 
 
 def render(dark: bool, stats: dict, today: date.date) -> str:
@@ -173,35 +215,32 @@ def render(dark: bool, stats: dict, today: date.date) -> str:
     muted = "#8b949e" if dark else "#57606a"
     green = "#7ee787" if dark else "#1a7f37"
     rows = [
-        line(40, 137, "OS", OS, green, muted, text),
-        line(40, 170, "Uptime", age(today), green, muted, text),
-        line(40, 203, "Host", "Rutgers University", green, muted, text),
-        line(40, 236, "IDE", "Cursor", green, muted, text),
-        line(40, 269, "Languages.Real", "English", green, muted, text),
-        line(40, 302, "Hobbies.Software", "CV, ML, Web Apps", green, muted, text),
-        line(40, 335, "Hobbies.Personal", "Robotics", green, muted, text),
-        line(590, 137, "Repos", stats["repos"], green, muted, text),
-        line(590, 170, "Contributed", stats["contributed"], green, muted, text),
-        line(590, 203, "Stars", stats["stars"], green, muted, text),
-        line(590, 236, "Commits", stats["commits"], green, muted, text),
-        line(590, 269, "Followers", stats["followers"], green, muted, text),
-        line(590, 302, "LOC Added", stats["loc_added"], green, muted, text),
-        line(590, 335, "LOC Deleted", stats["loc_deleted"], green, muted, text),
-        line(590, 368, "LOC Net", stats["loc_net"], green, muted, text),
+        leader_row(72, "OS", OS, green, muted, green),
+        leader_row(103, "Uptime", age(today), green, muted, green),
+        leader_row(134, "Host", "Rutgers University", green, muted, green),
+        leader_row(165, "IDE", "Cursor", green, muted, green),
+        leader_row(227, "Languages.Real", "English", green, muted, green),
+        leader_row(289, "Hobbies.Software", "CV, ML, Web Apps", green, muted, green),
+        leader_row(320, "Hobbies.Personal", "Robotics", green, muted, green),
+        section_row(382, "Contact", green, muted),
+        leader_row(413, "Email.Personal", "sunghoojungg@gmail.com", green, muted, green),
+        leader_row(444, "LinkedIn", "sunghoojung", green, muted, green),
+        leader_row(475, "Discord", "sunny17347", green, muted, green),
+        section_row(537, "GitHub Stats", green, muted),
+        stats_row(568, stats, muted, green, green),
+        stats_row(599, stats, muted, green, green),
+        stats_row(630, stats, muted, green, green),
     ]
     return "\n".join([
-        '<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430">',
-        f'<rect x="1" y="1" width="1118" height="428" rx="14" fill="{panel}" stroke="{border}" stroke-width="2"/>',
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="700" viewBox="0 0 1120 700">',
+        f'<rect x="1" y="1" width="1118" height="698" rx="14" fill="{panel}" stroke="{border}" stroke-width="2"/>',
         f'<path d="M1 15a14 14 0 0 1 14-14h1090a14 14 0 0 1 14 14v35H1z" fill="{bg}"/>',
         f'<line x1="1" y1="50" x2="1119" y2="50" stroke="{border}"/>',
         '<circle cx="25" cy="26" r="6" fill="#ff5f56"/><circle cx="46" cy="26" r="6" fill="#ffbd2e"/><circle cx="67" cy="26" r="6" fill="#27c93f"/>',
-        f'<text x="560" y="31" text-anchor="middle" font-family="monospace" font-size="14" fill="{green}" font-weight="700">Sunghoo at GitHub</text>',
-        f'<text x="40" y="82" font-family="monospace" font-size="17" fill="{green}" font-weight="700">profile</text>',
-        f'<text x="40" y="103" font-family="monospace" font-size="14" fill="{muted}">------------------------------------</text>',
-        f'<text x="590" y="82" font-family="monospace" font-size="17" fill="{green}" font-weight="700">GitHub Stats</text>',
-        f'<text x="590" y="103" font-family="monospace" font-size="14" fill="{muted}">------------------------------------</text>',
+        f'<text x="40" y="31" font-family="monospace" font-size="16" fill="{green}" font-weight="700">Sunghoo at GitHub</text>',
+        f'<text x="250" y="31" font-family="monospace" font-size="16" fill="{muted}">{"-" * 78}</text>',
         *rows,
-        f'<text x="40" y="398" font-family="monospace" font-size="12" fill="{muted}">Updated {today.isoformat()} | Add PROFILE_STATS_TOKEN for full contributed and LOC data</text>',
+        f'<text x="40" y="670" font-family="monospace" font-size="12" fill="{muted}">Updated {today.isoformat()} | Add PROFILE_STATS_TOKEN for full contributed and LOC data</text>',
         '</svg>',
         '',
     ])

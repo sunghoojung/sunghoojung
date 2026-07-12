@@ -11,6 +11,9 @@ IDE: Cursor
 Languages.Real: English
 Hobbies.Software: CV, ML, Web Apps
 Hobbies.Personal: Robotics
+Email.Personal: sunghoojungg@gmail.com
+LinkedIn: sunghoojung
+Discord: sunny17347
 ```
 
 The editable generator is `profile_stats.py`. The daily workflow regenerates `stats_light.svg` and `stats_dark.svg`.
