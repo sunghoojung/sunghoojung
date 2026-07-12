@@ -159,15 +159,15 @@ def svg_escape(item: object) -> str:
     return html.escape(value(item), quote=True)
 
 
-def svg_row(y: int, key: str, item: object, colors: dict, width: int = 96) -> str:
+def svg_row(y: int, key: str, item: object, width: int = 66) -> str:
     item_text = value(item)
     dots = "." * max(5, width - len(f". {key}: ") - len(item_text))
-    return (f'<tspan x="15" y="{y}" class="cc">. </tspan>'
-            f'<tspan class="key">{html.escape(key)}</tspan><tspan class="cc">: {dots} </tspan>'
-            f'<tspan class="value">{svg_escape(item)}</tspan>')
+    return (f'<tspan x="436" y="{y}" class="andrew-cc">. </tspan>'
+            f'<tspan class="andrew-key">{html.escape(key)}</tspan><tspan class="andrew-cc">: {dots} </tspan>'
+            f'<tspan class="andrew-value">{svg_escape(item)}</tspan>')
 
 
-def render_svg(dark: bool, stats: dict, today: date.date) -> str:
+def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> str:
     if dark:
         background = "#161b22"
         text = "#c9d1d9"
@@ -180,49 +180,58 @@ def render_svg(dark: bool, stats: dict, today: date.date) -> str:
         key = "#953800"
         val = "#0a3069"
         cc = "#c2cfde"
-    colors = {"background": background, "text": text, "key": key, "value": val, "cc": cc}
+    if '<g font-size="15.5">' in source:
+        prefix = source.split('<g font-size="15.5">', 1)[0]
+    else:
+        prefix = source.split('<text x="436" y="30"', 1)[0]
+    prefix = prefix.replace('width="862" height="486" viewBox="0 0 862 486"', 'width="1120" height="530" viewBox="0 0 1120 530"')
+    prefix = prefix.replace('width="860" height="484"', 'width="1118" height="528"')
+    prefix = prefix.replace('h832', 'h1090').replace('h-860', 'h-1118').replace('x2="861"', 'x2="1119"')
+    prefix = prefix.replace("font-family=\"'JetBrains Mono','Fira Code',ui-monospace,'SFMono-Regular',Menlo,monospace\"", 'font-family="ConsolasFallback,Consolas,monospace"')
+    prefix = "\n".join(line for line in prefix.splitlines() if "sunghoo@github: ~" not in line)
+    if ".andrew-key" not in prefix:
+        prefix = prefix.replace(
+            "<style>\n",
+            "<style>\n@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }\n"
+            f".andrew-key {{fill: {key};}} .andrew-value {{fill: {val};}} .andrew-add {{fill: #3fb950;}} .andrew-del {{fill: #f85149;}} .andrew-cc {{fill: {cc};}} text, tspan {{white-space: pre;}}\n",
+            1,
+        )
     rows = [
-        svg_row(50, "OS", OS, colors),
-        svg_row(70, "Uptime", age(today), colors),
-        svg_row(90, "Host", "Rutgers University", colors),
-        svg_row(110, "IDE", "Cursor", colors),
-        svg_row(150, "Languages.Programming", "Python, Go Lang", colors),
-        svg_row(170, "Languages.Real", "English", colors),
-        svg_row(210, "Hobbies.Software", "CV, ML, Web Apps", colors),
-        svg_row(230, "Hobbies.Personal", "Robotics", colors),
-        f'<tspan x="15" y="270">- Contact</tspan> -{"-" * 76}',
-        svg_row(290, "Email.Personal", "sunghoojungg@gmail.com", colors),
-        svg_row(310, "LinkedIn", "sunghoojung", colors),
-        svg_row(330, "Discord", "sunny17347", colors),
-        f'<tspan x="15" y="370">- GitHub Stats</tspan> -{"-" * 69}',
-        (f'<tspan x="15" y="390" class="cc">. </tspan><tspan class="key">Repos</tspan>'
-         f'<tspan class="cc">: .... </tspan><tspan class="value">{svg_escape(stats["repos"])}</tspan>'
-         f' &#123;<tspan class="key">Contributed</tspan>: <tspan class="value">{svg_escape(stats["contributed"])}</tspan>&#125; | '
-         f'<tspan class="key">Stars</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">{svg_escape(stats["stars"])}</tspan>'),
-        (f'<tspan x="15" y="410" class="cc">. </tspan><tspan class="key">Commits</tspan>'
-         f'<tspan class="cc">: ................ </tspan><tspan class="value">{svg_escape(stats["commits"])}</tspan> | '
-         f'<tspan class="key">Followers</tspan>:<tspan class="cc"> ........ </tspan><tspan class="value">{svg_escape(stats["followers"])}</tspan>'),
-        (f'<tspan x="15" y="430" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>'
-         f'<tspan class="cc">: </tspan><tspan class="value">{svg_escape(stats["loc_net"])}</tspan> ( '
-         f'<tspan class="addColor">{svg_escape(stats["loc_added"])}++</tspan>, '
-         f'<tspan class="delColor">{svg_escape(stats["loc_deleted"])}--</tspan> )'),
+        svg_row(70, "OS", OS),
+        svg_row(90, "Uptime", age(today)),
+        svg_row(110, "Host", "Rutgers University"),
+        svg_row(130, "IDE", "Cursor"),
+        svg_row(170, "Languages.Programming", "Python, Go Lang"),
+        svg_row(190, "Languages.Real", "English"),
+        svg_row(230, "Hobbies.Software", "CV, ML, Web Apps"),
+        svg_row(250, "Hobbies.Personal", "Robotics"),
+        f'<tspan x="436" y="290">- Contact</tspan> -{"-" * 61}',
+        svg_row(310, "Email.Personal", "sunghoojungg@gmail.com"),
+        svg_row(330, "LinkedIn", "sunghoojung"),
+        svg_row(350, "Discord", "sunny17347"),
+        f'<tspan x="436" y="390">- GitHub Stats</tspan> -{"-" * 54}',
+        (f'<tspan x="436" y="410" class="andrew-cc">. </tspan><tspan class="andrew-key">Repos</tspan>'
+         f'<tspan class="andrew-cc">: .... </tspan><tspan class="andrew-value">{svg_escape(stats["repos"])}</tspan>'
+         f' &#123;<tspan class="andrew-key">Contributed</tspan>: <tspan class="andrew-value">{svg_escape(stats["contributed"])}</tspan>&#125; | '
+         f'<tspan class="andrew-key">Stars</tspan>:<tspan class="andrew-cc"> ............ </tspan><tspan class="andrew-value">{svg_escape(stats["stars"])}</tspan>'),
+        (f'<tspan x="436" y="430" class="andrew-cc">. </tspan><tspan class="andrew-key">Commits</tspan>'
+         f'<tspan class="andrew-cc">: ................ </tspan><tspan class="andrew-value">{svg_escape(stats["commits"])}</tspan> | '
+         f'<tspan class="andrew-key">Followers</tspan>:<tspan class="andrew-cc"> ........ </tspan><tspan class="andrew-value">{svg_escape(stats["followers"])}</tspan>'),
+        (f'<tspan x="436" y="450" class="andrew-cc">. </tspan><tspan class="andrew-key">Lines of Code on GitHub</tspan>'
+         f'<tspan class="andrew-cc">: </tspan><tspan class="andrew-value">{svg_escape(stats["loc_net"])}</tspan> ( '
+         f'<tspan class="andrew-add">{svg_escape(stats["loc_added"])}++</tspan>, '
+         f'<tspan class="andrew-del">{svg_escape(stats["loc_deleted"])}--</tspan> )'),
     ]
-    return "\n".join([
-        "<?xml version='1.0' encoding='UTF-8'?>",
-        '<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="450px" font-size="16px">',
-        "<style>",
-        "@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }",
-        f".key {{fill: {key};}} .value {{fill: {val};}} .addColor {{fill: #3fb950;}} .delColor {{fill: #f85149;}} .cc {{fill: {cc};}} text, tspan {{white-space: pre;}}",
-        "</style>",
-        f'<rect width="985px" height="450px" fill="{background}" rx="15"/>',
-        f'<text x="15" y="30" fill="{text}"><tspan x="15" y="30">Sunghoo at GitHub</tspan> -{"-" * 75}-</text>',
-        f'<text x="15" y="30" fill="{text}">',
+    panel = "\n".join([
+        '<g font-size="15.5">',
+        f'<text x="436" y="30" fill="{text}"><tspan x="436" y="30">sunghoo@github</tspan> -{"-" * 59}-</text>',
+        f'<text x="436" y="30" fill="{text}">',
         *rows,
-        f'<tspan x="15" y="445" class="cc">Updated {today.isoformat()}</tspan>',
+        f'<tspan x="436" y="500" class="andrew-cc">Updated {today.isoformat()}</tspan>',
         "</text>",
-        "</svg>",
-        "",
+        "</g>",
     ])
+    return prefix + panel + "\n</svg>\n"
 
 
 def main() -> None:
@@ -232,8 +241,10 @@ def main() -> None:
     except Exception as error:
         print(f"Full stats unavailable: {error}")
         stats = public_stats()
-    (ROOT / "stats_light.svg").write_text(render_svg(False, stats, today), encoding="utf-8")
-    (ROOT / "stats_dark.svg").write_text(render_svg(True, stats, today), encoding="utf-8")
+    light = ROOT / "light_mode.svg"
+    dark = ROOT / "dark_mode.svg"
+    light.write_text(render_combined(light.read_text(encoding="utf-8"), False, stats, today), encoding="utf-8")
+    dark.write_text(render_combined(dark.read_text(encoding="utf-8"), True, stats, today), encoding="utf-8")
     print(json.dumps({"date": today.isoformat(), "age": age(today), "stats": stats}, indent=2))
 
 
