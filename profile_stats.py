@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import datetime as date
+import html
 import json
 import os
 from pathlib import Path
@@ -154,43 +155,74 @@ def value(item: object) -> str:
     return f"{item:,}" if isinstance(item, int) else str(item)
 
 
-def leader_row(key: str, item: object, width: int = 92) -> str:
-    value_text = value(item)
-    prefix_length = len(f". {key}: ")
-    dots = "." * max(5, width - prefix_length - len(value_text))
-    return f". {key}: {dots} {value_text}"
+def svg_escape(item: object) -> str:
+    return html.escape(value(item), quote=True)
 
 
-def section_row(title: str) -> str:
-    return f"- {title} " + "-" * 82
+def svg_row(y: int, key: str, item: object, colors: dict, width: int = 96) -> str:
+    item_text = value(item)
+    dots = "." * max(5, width - len(f". {key}: ") - len(item_text))
+    return (f'<tspan x="15" y="{y}" class="cc">. </tspan>'
+            f'<tspan class="key">{html.escape(key)}</tspan><tspan class="cc">: {dots} </tspan>'
+            f'<tspan class="value">{svg_escape(item)}</tspan>')
 
 
-def render_text(stats: dict, today: date.date) -> str:
-    lines = [
-        "Sunghoo at GitHub " + "-" * 78,
-        leader_row("OS", OS),
-        leader_row("Uptime", age(today)),
-        leader_row("Host", "Rutgers University"),
-        leader_row("IDE", "Cursor"),
-        "",
-        leader_row("Languages.Real", "English"),
-        "",
-        leader_row("Hobbies.Software", "CV, ML, Web Apps"),
-        leader_row("Hobbies.Personal", "Robotics"),
-        "",
-        section_row("Contact"),
-        leader_row("Email.Personal", "sunghoojungg@gmail.com"),
-        leader_row("LinkedIn", "sunghoojung"),
-        leader_row("Discord", "sunny17347"),
-        "",
-        section_row("GitHub Stats"),
-        f". Repos: .... {value(stats['repos'])} {{Contributed: {value(stats['contributed'])}}} | Stars:............ {value(stats['stars'])}",
-        f". Commits: ................. {value(stats['commits'])} | Followers: ........ {value(stats['followers'])}",
-        f". Lines of Code on GitHub: {value(stats['loc_net'])} ( {value(stats['loc_added'])}++, {value(stats['loc_deleted'])}-- )",
-        "",
-        f"Updated {today.isoformat()}",
+def render_svg(dark: bool, stats: dict, today: date.date) -> str:
+    if dark:
+        background = "#161b22"
+        text = "#c9d1d9"
+        key = "#ffa657"
+        val = "#a5d6ff"
+        cc = "#616e7f"
+    else:
+        background = "#f6f8fa"
+        text = "#24292f"
+        key = "#953800"
+        val = "#0a3069"
+        cc = "#c2cfde"
+    colors = {"background": background, "text": text, "key": key, "value": val, "cc": cc}
+    rows = [
+        svg_row(50, "OS", OS, colors),
+        svg_row(70, "Uptime", age(today), colors),
+        svg_row(90, "Host", "Rutgers University", colors),
+        svg_row(110, "IDE", "Cursor", colors),
+        svg_row(150, "Languages.Programming", "Python, Go Lang", colors),
+        svg_row(170, "Languages.Real", "English", colors),
+        svg_row(210, "Hobbies.Software", "CV, ML, Web Apps", colors),
+        svg_row(230, "Hobbies.Personal", "Robotics", colors),
+        f'<tspan x="15" y="270">- Contact</tspan> -{"-" * 76}',
+        svg_row(290, "Email.Personal", "sunghoojungg@gmail.com", colors),
+        svg_row(310, "LinkedIn", "sunghoojung", colors),
+        svg_row(330, "Discord", "sunny17347", colors),
+        f'<tspan x="15" y="370">- GitHub Stats</tspan> -{"-" * 69}',
+        (f'<tspan x="15" y="390" class="cc">. </tspan><tspan class="key">Repos</tspan>'
+         f'<tspan class="cc">: .... </tspan><tspan class="value">{svg_escape(stats["repos"])}</tspan>'
+         f' &#123;<tspan class="key">Contributed</tspan>: <tspan class="value">{svg_escape(stats["contributed"])}</tspan>&#125; | '
+         f'<tspan class="key">Stars</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">{svg_escape(stats["stars"])}</tspan>'),
+        (f'<tspan x="15" y="410" class="cc">. </tspan><tspan class="key">Commits</tspan>'
+         f'<tspan class="cc">: ................ </tspan><tspan class="value">{svg_escape(stats["commits"])}</tspan> | '
+         f'<tspan class="key">Followers</tspan>:<tspan class="cc"> ........ </tspan><tspan class="value">{svg_escape(stats["followers"])}</tspan>'),
+        (f'<tspan x="15" y="430" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>'
+         f'<tspan class="cc">: </tspan><tspan class="value">{svg_escape(stats["loc_net"])}</tspan> ( '
+         f'<tspan class="addColor">{svg_escape(stats["loc_added"])}++</tspan>, '
+         f'<tspan class="delColor">{svg_escape(stats["loc_deleted"])}--</tspan> )'),
     ]
-    return "\n".join(lines)
+    return "\n".join([
+        "<?xml version='1.0' encoding='UTF-8'?>",
+        '<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="450px" font-size="16px">',
+        "<style>",
+        "@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }",
+        f".key {{fill: {key};}} .value {{fill: {val};}} .addColor {{fill: #3fb950;}} .delColor {{fill: #f85149;}} .cc {{fill: {cc};}} text, tspan {{white-space: pre;}}",
+        "</style>",
+        f'<rect width="985px" height="450px" fill="{background}" rx="15"/>',
+        f'<text x="15" y="30" fill="{text}"><tspan x="15" y="30">Sunghoo at GitHub</tspan> -{"-" * 75}-</text>',
+        f'<text x="15" y="30" fill="{text}">',
+        *rows,
+        f'<tspan x="15" y="445" class="cc">Updated {today.isoformat()}</tspan>',
+        "</text>",
+        "</svg>",
+        "",
+    ])
 
 
 def main() -> None:
@@ -200,17 +232,8 @@ def main() -> None:
     except Exception as error:
         print(f"Full stats unavailable: {error}")
         stats = public_stats()
-    readme = ROOT / "README.md"
-    current = readme.read_text(encoding="utf-8")
-    start_marker = "<!-- PROFILE_TEXT:START -->"
-    end_marker = "<!-- PROFILE_TEXT:END -->"
-    if start_marker not in current or end_marker not in current:
-        raise RuntimeError("README.md is missing PROFILE_TEXT markers")
-    start = current.index(start_marker) + len(start_marker)
-    end = current.index(end_marker)
-    block = "\n\n```text\n" + render_text(stats, today) + "\n```\n"
-    updated = current[:start] + block + current[end:]
-    readme.write_text(updated, encoding="utf-8")
+    (ROOT / "stats_light.svg").write_text(render_svg(False, stats, today), encoding="utf-8")
+    (ROOT / "stats_dark.svg").write_text(render_svg(True, stats, today), encoding="utf-8")
     print(json.dumps({"date": today.isoformat(), "age": age(today), "stats": stats}, indent=2))
 
 
