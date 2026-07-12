@@ -171,20 +171,21 @@ def svg_row(y: int, key: str, item: object) -> str:
     item_text = value(item)
     value_start = VALUE_END - len(item_text) * CHAR_WIDTH
     dots_start = label_end + 8
-    dots_width = max(8, value_start - dots_start - 5)
+    dot_count = max(1, round((value_start - dots_start) / CHAR_WIDTH))
     return (
         f'<tspan x="{PANEL_X}" y="{y}" class="andrew-cc">. </tspan>'
         f'<tspan class="andrew-key">{html.escape(key)}</tspan><tspan>:</tspan>'
-        f'<tspan x="{dots_start:.1f}" class="andrew-cc" textLength="{dots_width:.1f}" lengthAdjust="spacing">....................</tspan>'
+        f'<tspan x="{dots_start:.1f}" class="andrew-cc">{"." * dot_count}</tspan>'
         f'<tspan x="{value_start:.1f}" class="andrew-value">{svg_escape(item)}</tspan>'
     )
 
 
 def section_row(y: int, title: str, text_color: str) -> str:
     title_end = PANEL_X + len(f"- {title} ") * CHAR_WIDTH
+    dash_count = max(1, round((VALUE_END - title_end) / CHAR_WIDTH))
     return (
         f'<tspan x="{PANEL_X}" y="{y}">- {html.escape(title)} </tspan>'
-        f'<tspan class="andrew-cc" textLength="{VALUE_END - title_end:.1f}" lengthAdjust="spacing">------------------------------------</tspan>'
+        f'<tspan class="andrew-cc">{"-" * dash_count}</tspan>'
     )
 
 
@@ -239,12 +240,12 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
          f'<tspan x="610" class="andrew-cc"> &#123;</tspan><tspan class="andrew-key">Contributed</tspan><tspan>: </tspan>'
          f'<tspan x="{775 - len(value(stats["contributed"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["contributed"])}</tspan>'
          f'<tspan x="790" class="andrew-cc"> &#125; | </tspan><tspan class="andrew-key">Stars</tspan><tspan>:</tspan>'
-         f'<tspan x="{790 + len(" } | Stars:") * CHAR_WIDTH:.1f}" class="andrew-cc" textLength="{max(8, VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH - (790 + len(" } | Stars:") * CHAR_WIDTH) - 2):.1f}" lengthAdjust="spacing">....................</tspan>'
+         f'<tspan x="{790 + len(" } | Stars:") * CHAR_WIDTH:.1f}" class="andrew-cc">{"." * max(1, round((VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH - (790 + len(" } | Stars:") * CHAR_WIDTH)) / CHAR_WIDTH))}</tspan>'
          f'<tspan x="{VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["stars"])}</tspan>'),
         (f'<tspan x="{PANEL_X}" y="450" class="andrew-cc">. </tspan><tspan class="andrew-key">Commits</tspan><tspan>: ................</tspan>'
          f'<tspan x="{700 - len(value(stats["commits"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["commits"])}</tspan>'
          f'<tspan x="720" class="andrew-cc"> | </tspan><tspan class="andrew-key">Followers</tspan><tspan>:</tspan>'
-         f'<tspan x="{720 + len(" | Followers:") * CHAR_WIDTH:.1f}" class="andrew-cc" textLength="{max(8, VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH - (720 + len(" | Followers:") * CHAR_WIDTH) - 2):.1f}" lengthAdjust="spacing">....................</tspan>'
+         f'<tspan x="{720 + len(" | Followers:") * CHAR_WIDTH:.1f}" class="andrew-cc">{"." * max(1, round((VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH - (720 + len(" | Followers:") * CHAR_WIDTH)) / CHAR_WIDTH))}</tspan>'
          f'<tspan x="{VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["followers"])}</tspan>'),
     ]
     loc_close_x = 960
@@ -264,7 +265,7 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
     )
     panel = "\n".join([
         '<g font-size="15.5">',
-        f'<text x="{PANEL_X}" y="30" fill="{text}"><tspan x="{PANEL_X}" y="30">sunghoo@github</tspan><tspan x="{PANEL_X + len("sunghoo@github") * CHAR_WIDTH + 8:.1f}" class="andrew-cc" textLength="{VALUE_END - (PANEL_X + len("sunghoo@github") * CHAR_WIDTH + 8):.1f}" lengthAdjust="spacing">------------------------------------------------</tspan>',
+        f'<text x="{PANEL_X}" y="30" fill="{text}"><tspan x="{PANEL_X}" y="30">sunghoo@github</tspan><tspan x="{PANEL_X + len("sunghoo@github") * CHAR_WIDTH + 8:.1f}" class="andrew-cc">{"-" * max(1, round((VALUE_END - (PANEL_X + len("sunghoo@github") * CHAR_WIDTH + 8)) / CHAR_WIDTH))}</tspan>',
         *rows,
         "</text>",
         "</g>",
