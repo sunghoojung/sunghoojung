@@ -160,9 +160,9 @@ def svg_escape(item: object) -> str:
 
 
 PANEL_X = 390
-VALUE_END = 970
+VALUE_END = 1105
+CANVAS_WIDTH = 1120
 CHAR_WIDTH = 9.3
-LOC_CHAR_WIDTH = 8.1
 
 
 def svg_row(y: int, key: str, item: object) -> str:
@@ -213,12 +213,12 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
     )
     prefix = "\n".join([
         "<?xml version='1.0' encoding='UTF-8'?>",
-        '<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="530px" font-size="16px">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="{CANVAS_WIDTH}px" height="530px" font-size="16px">',
         "<style>",
         "@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }",
         f".andrew-key {{fill: {key};}} .andrew-value {{fill: {val};}} .andrew-add {{fill: #3fb950;}} .andrew-del {{fill: #f85149;}} .andrew-cc {{fill: {cc};}} text, tspan {{white-space: pre;}}",
         "</style>",
-        f'<rect width="985px" height="530px" fill="{background}" rx="15"/>',
+        f'<rect width="{CANVAS_WIDTH}px" height="530px" fill="{background}" rx="15"/>',
         face_group,
     ])
     rows = [
@@ -248,20 +248,20 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
          f'<tspan x="{720 + len(" | Followers:") * CHAR_WIDTH:.1f}" class="andrew-cc">{"." * max(1, round((VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH - (720 + len(" | Followers:") * CHAR_WIDTH)) / CHAR_WIDTH))}</tspan>'
          f'<tspan x="{VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["followers"])}</tspan>'),
     ]
-    loc_close_x = 960
+    loc_close_x = VALUE_END - 10
     loc_deleted_end = loc_close_x - 10
-    loc_deleted_start = loc_deleted_end - (len(value(stats["loc_deleted"])) + 2) * LOC_CHAR_WIDTH
+    loc_deleted_start = loc_deleted_end - (len(value(stats["loc_deleted"])) + 2) * CHAR_WIDTH
     loc_comma_x = loc_deleted_start - 18
     loc_added_end = loc_comma_x - 8
-    loc_added_start = loc_added_end - (len(value(stats["loc_added"])) + 2) * LOC_CHAR_WIDTH
+    loc_added_start = loc_added_end - (len(value(stats["loc_added"])) + 2) * CHAR_WIDTH
     loc_open_x = loc_added_start - 20
     loc_net_end = loc_open_x - 8
-    loc_net_start = loc_net_end - len(value(stats["loc_net"])) * LOC_CHAR_WIDTH
+    loc_net_start = loc_net_end - len(value(stats["loc_net"])) * CHAR_WIDTH
     rows.append(
-        f'<tspan x="{PANEL_X}" y="470" font-size="13.5" class="andrew-cc">. </tspan><tspan font-size="13.5" class="andrew-key">Lines of Code on GitHub</tspan><tspan font-size="13.5">:</tspan>'
-        f'<tspan font-size="13.5" class="andrew-cc">. </tspan><tspan x="{loc_net_start:.1f}" font-size="13.5" class="andrew-value">{svg_escape(stats["loc_net"])}</tspan>'
-        f'<tspan x="{loc_open_x:.1f}" font-size="13.5" class="andrew-cc"> ( </tspan><tspan x="{loc_added_start:.1f}" font-size="13.5" class="andrew-add">{svg_escape(stats["loc_added"])}++</tspan>'
-        f'<tspan x="{loc_comma_x:.1f}" font-size="13.5" class="andrew-cc">, </tspan><tspan x="{loc_deleted_start:.1f}" font-size="13.5" class="andrew-del">{svg_escape(stats["loc_deleted"])}--</tspan><tspan x="{loc_close_x}" font-size="13.5" class="andrew-cc"> )</tspan>'
+        f'<tspan x="{PANEL_X}" y="470" class="andrew-cc">. </tspan><tspan class="andrew-key">Lines of Code on GitHub</tspan><tspan>:</tspan>'
+        f'<tspan class="andrew-cc"> </tspan><tspan x="{loc_net_start:.1f}" class="andrew-value">{svg_escape(stats["loc_net"])}</tspan>'
+        f'<tspan x="{loc_open_x:.1f}" class="andrew-cc"> ( </tspan><tspan x="{loc_added_start:.1f}" class="andrew-add">{svg_escape(stats["loc_added"])}++</tspan>'
+        f'<tspan x="{loc_comma_x:.1f}" class="andrew-cc">, </tspan><tspan x="{loc_deleted_start:.1f}" class="andrew-del">{svg_escape(stats["loc_deleted"])}--</tspan><tspan x="{loc_close_x}" class="andrew-cc"> )</tspan>'
     )
     panel = "\n".join([
         '<g font-size="15.5">',
