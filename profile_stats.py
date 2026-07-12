@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import datetime as date
-import html
 import json
 import os
 from pathlib import Path
@@ -155,95 +154,43 @@ def value(item: object) -> str:
     return f"{item:,}" if isinstance(item, int) else str(item)
 
 
-def esc(item: object) -> str:
-    return html.escape(value(item), quote=True)
-
-
-def leader_row(y: int, key: str, item: object, key_color: str, muted: str, value_color: str) -> str:
+def leader_row(key: str, item: object, width: int = 92) -> str:
     value_text = value(item)
     prefix_length = len(f". {key}: ")
-    dots = "." * max(5, 92 - prefix_length - len(value_text))
-    return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
-            f'<tspan fill="{muted}">. </tspan>'
-            f'<tspan fill="{key_color}" font-weight="700">{html.escape(key)}</tspan>'
-            f'<tspan fill="{muted}">: {dots} </tspan>'
-            f'<tspan fill="{value_color}">{esc(item)}</tspan></text>')
+    dots = "." * max(5, width - prefix_length - len(value_text))
+    return f". {key}: {dots} {value_text}"
 
 
-def section_row(y: int, title: str, green: str, muted: str) -> str:
-    return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
-            f'<tspan fill="{green}" font-weight="700">- {html.escape(title)} </tspan>'
-            f'<tspan fill="{muted}">{"-" * 82}</tspan></text>')
+def section_row(title: str) -> str:
+    return f"- {title} " + "-" * 82
 
 
-def stats_row(y: int, stats: dict, muted: str, green: str, value_color: str) -> str:
-    repos = esc(stats["repos"])
-    contributed = esc(stats["contributed"])
-    stars = esc(stats["stars"])
-    commits = esc(stats["commits"])
-    followers = esc(stats["followers"])
-    added = esc(stats["loc_added"])
-    deleted = esc(stats["loc_deleted"])
-    net = esc(stats["loc_net"])
-    if y == 568:
-        return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
-                f'<tspan fill="{muted}">. </tspan><tspan fill="{green}" font-weight="700">Repos</tspan>'
-                f'<tspan fill="{muted}">: .... </tspan><tspan fill="{value_color}">{repos}</tspan>'
-                f'<tspan fill="{muted}"> &#123;</tspan><tspan fill="{green}" font-weight="700">Contributed</tspan>'
-                f'<tspan fill="{muted}">: </tspan><tspan fill="{value_color}">{contributed}</tspan>'
-                f'<tspan fill="{muted}">&#125; | </tspan><tspan fill="{green}" font-weight="700">Stars</tspan>'
-                f'<tspan fill="{muted}">: ............ </tspan><tspan fill="{value_color}">{stars}</tspan></text>')
-    if y == 599:
-        return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
-                f'<tspan fill="{muted}">. </tspan><tspan fill="{green}" font-weight="700">Commits</tspan>'
-                f'<tspan fill="{muted}">: ................ </tspan><tspan fill="{value_color}">{commits}</tspan>'
-                f'<tspan fill="{muted}"> | </tspan><tspan fill="{green}" font-weight="700">Followers</tspan>'
-                f'<tspan fill="{muted}">: ........ </tspan><tspan fill="{value_color}">{followers}</tspan></text>')
-    return (f'<text x="40" y="{y}" font-family="monospace" font-size="16">'
-            f'<tspan fill="{muted}">. </tspan><tspan fill="{green}" font-weight="700">Lines of Code on GitHub</tspan>'
-            f'<tspan fill="{muted}">: </tspan><tspan fill="{value_color}">{net}</tspan>'
-            f'<tspan fill="{muted}"> ( </tspan><tspan fill="#3fb950">{added}++</tspan>'
-            f'<tspan fill="{muted}">, </tspan><tspan fill="#f85149">{deleted}--</tspan>'
-            f'<tspan fill="{muted}"> )</tspan></text>')
-
-
-def render(dark: bool, stats: dict, today: date.date) -> str:
-    bg = "#0d1117" if dark else "#f6f8fa"
-    panel = "#161b22" if dark else "#ffffff"
-    border = "#30363d" if dark else "#d0d7de"
-    text = "#c9d1d9" if dark else "#24292f"
-    muted = "#8b949e" if dark else "#57606a"
-    green = "#7ee787" if dark else "#1a7f37"
-    rows = [
-        leader_row(72, "OS", OS, green, muted, green),
-        leader_row(103, "Uptime", age(today), green, muted, green),
-        leader_row(134, "Host", "Rutgers University", green, muted, green),
-        leader_row(165, "IDE", "Cursor", green, muted, green),
-        leader_row(227, "Languages.Real", "English", green, muted, green),
-        leader_row(289, "Hobbies.Software", "CV, ML, Web Apps", green, muted, green),
-        leader_row(320, "Hobbies.Personal", "Robotics", green, muted, green),
-        section_row(382, "Contact", green, muted),
-        leader_row(413, "Email.Personal", "sunghoojungg@gmail.com", green, muted, green),
-        leader_row(444, "LinkedIn", "sunghoojung", green, muted, green),
-        leader_row(475, "Discord", "sunny17347", green, muted, green),
-        section_row(537, "GitHub Stats", green, muted),
-        stats_row(568, stats, muted, green, green),
-        stats_row(599, stats, muted, green, green),
-        stats_row(630, stats, muted, green, green),
+def render_text(stats: dict, today: date.date) -> str:
+    lines = [
+        "Sunghoo at GitHub " + "-" * 78,
+        leader_row("OS", OS),
+        leader_row("Uptime", age(today)),
+        leader_row("Host", "Rutgers University"),
+        leader_row("IDE", "Cursor"),
+        "",
+        leader_row("Languages.Real", "English"),
+        "",
+        leader_row("Hobbies.Software", "CV, ML, Web Apps"),
+        leader_row("Hobbies.Personal", "Robotics"),
+        "",
+        section_row("Contact"),
+        leader_row("Email.Personal", "sunghoojungg@gmail.com"),
+        leader_row("LinkedIn", "sunghoojung"),
+        leader_row("Discord", "sunny17347"),
+        "",
+        section_row("GitHub Stats"),
+        f". Repos: .... {value(stats['repos'])} {{Contributed: {value(stats['contributed'])}}} | Stars:............ {value(stats['stars'])}",
+        f". Commits: ................. {value(stats['commits'])} | Followers: ........ {value(stats['followers'])}",
+        f". Lines of Code on GitHub: {value(stats['loc_net'])} ( {value(stats['loc_added'])}++, {value(stats['loc_deleted'])}-- )",
+        "",
+        f"Updated {today.isoformat()}",
     ]
-    return "\n".join([
-        '<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="700" viewBox="0 0 1120 700">',
-        f'<rect x="1" y="1" width="1118" height="698" rx="14" fill="{panel}" stroke="{border}" stroke-width="2"/>',
-        f'<path d="M1 15a14 14 0 0 1 14-14h1090a14 14 0 0 1 14 14v35H1z" fill="{bg}"/>',
-        f'<line x1="1" y1="50" x2="1119" y2="50" stroke="{border}"/>',
-        '<circle cx="25" cy="26" r="6" fill="#ff5f56"/><circle cx="46" cy="26" r="6" fill="#ffbd2e"/><circle cx="67" cy="26" r="6" fill="#27c93f"/>',
-        f'<text x="40" y="31" font-family="monospace" font-size="16" fill="{green}" font-weight="700">Sunghoo at GitHub</text>',
-        f'<text x="250" y="31" font-family="monospace" font-size="16" fill="{muted}">{"-" * 78}</text>',
-        *rows,
-        f'<text x="40" y="670" font-family="monospace" font-size="12" fill="{muted}">Updated {today.isoformat()} | Add PROFILE_STATS_TOKEN for full contributed and LOC data</text>',
-        '</svg>',
-        '',
-    ])
+    return "\n".join(lines)
 
 
 def main() -> None:
@@ -253,8 +200,17 @@ def main() -> None:
     except Exception as error:
         print(f"Full stats unavailable: {error}")
         stats = public_stats()
-    (ROOT / "stats_light.svg").write_text(render(False, stats, today), encoding="utf-8")
-    (ROOT / "stats_dark.svg").write_text(render(True, stats, today), encoding="utf-8")
+    readme = ROOT / "README.md"
+    current = readme.read_text(encoding="utf-8")
+    start_marker = "<!-- PROFILE_TEXT:START -->"
+    end_marker = "<!-- PROFILE_TEXT:END -->"
+    if start_marker not in current or end_marker not in current:
+        raise RuntimeError("README.md is missing PROFILE_TEXT markers")
+    start = current.index(start_marker) + len(start_marker)
+    end = current.index(end_marker)
+    block = "\n\n```text\n" + render_text(stats, today) + "\n```\n"
+    updated = current[:start] + block + current[end:]
+    readme.write_text(updated, encoding="utf-8")
     print(json.dumps({"date": today.isoformat(), "age": age(today), "stats": stats}, indent=2))
 
 
