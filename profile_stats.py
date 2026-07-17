@@ -7,6 +7,7 @@ import datetime as date
 import html
 import json
 import os
+import time
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import Request, urlopen
@@ -58,6 +59,26 @@ def age(today: date.date) -> str:
     return f"{years} years, {months} months, {days} days"
 
 
+def repo_loc(owner: str, name: str) -> tuple[int, int]:
+    """Sum USER's additions/deletions in one repo via the contributor stats API."""
+    url = f"https://api.github.com/repos/{owner}/{name}/stats/contributors"
+    for _ in range(12):
+        try:
+            with urlopen(Request(url, headers=HEADERS), timeout=60) as response:
+                if response.status == 202:  # stats cache is warming; retry shortly
+                    time.sleep(3)
+                    continue
+                payload = response.read().decode()
+        except Exception:
+            return 0, 0
+        for entry in json.loads(payload) if payload else []:
+            if (entry.get("author") or {}).get("login") == USER:
+                weeks = entry.get("weeks", [])
+                return sum(week["a"] for week in weeks), sum(week["d"] for week in weeks)
+        return 0, 0
+    return 0, 0
+
+
 def public_stats() -> dict:
     profile = get_json(f"https://api.github.com/users/{USER}")
     repos = []
@@ -72,15 +93,23 @@ def public_stats() -> dict:
         commits = get_json(f"https://api.github.com/search/commits?q={quote(f'author:{USER}')}&per_page=1")["total_count"]
     except Exception:
         commits = "n/a"
+    loc_added = loc_deleted = contributed = 0
+    for repo in repos:
+        owner, name = repo["full_name"].split("/", 1)
+        added, deleted = repo_loc(owner, name)
+        loc_added += added
+        loc_deleted += deleted
+        if added or deleted:  # count repos USER has actually authored code in
+            contributed += 1
     return {
         "repos": len(repos),
-        "contributed": "add token",
+        "contributed": contributed,
         "stars": sum(repo.get("stargazers_count", 0) for repo in repos),
         "commits": commits,
         "followers": profile.get("followers", 0),
-        "loc_added": "add token",
-        "loc_deleted": "add token",
-        "loc_net": "add token",
+        "loc_added": loc_added,
+        "loc_deleted": loc_deleted,
+        "loc_net": loc_added - loc_deleted,
     }
 
 
