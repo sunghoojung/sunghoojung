@@ -188,9 +188,9 @@ def svg_escape(item: object) -> str:
     return html.escape(value(item), quote=True)
 
 
-PANEL_X = 390
-VALUE_END = 1105
-CANVAS_WIDTH = 1120
+PANEL_X = 24
+VALUE_END = PANEL_X + 715
+CANVAS_WIDTH = VALUE_END + 24
 CHAR_WIDTH = 9.3
 
 
@@ -218,7 +218,7 @@ def section_row(y: int, title: str, text_color: str) -> str:
     )
 
 
-def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> str:
+def render_card(dark: bool, stats: dict, today: date.date) -> str:
     if dark:
         background = "#161b22"
         text = "#c9d1d9"
@@ -231,24 +231,14 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
         key = "#953800"
         val = "#0a3069"
         cc = "#c2cfde"
-    face_start = source.index('<g class="port2"')
-    panel_start = source.index('<g font-size="15.5">', face_start)
-    face_group = source[face_start:panel_start].replace(
-        '<g class="port2">',
-        '<g class="port2" transform="translate(-35 0)">',
-    ).replace(
-        ".port2{opacity:0;animation:portfade .7s ease forwards;}@keyframes portfade{to{opacity:1;}}",
-        ".port2{opacity:1;}",
-    )
     prefix = "\n".join([
         "<?xml version='1.0' encoding='UTF-8'?>",
-        f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="{CANVAS_WIDTH}px" height="530px" font-size="16px">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="{CANVAS_WIDTH}px" height="500px" font-size="16px">',
         "<style>",
         "@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }",
         f".andrew-key {{fill: {key};}} .andrew-value {{fill: {val};}} .andrew-add {{fill: #3fb950;}} .andrew-del {{fill: #f85149;}} .andrew-cc {{fill: {cc};}} text, tspan {{white-space: pre;}}",
         "</style>",
-        f'<rect width="{CANVAS_WIDTH}px" height="530px" fill="{background}" rx="15"/>',
-        face_group,
+        f'<rect width="{CANVAS_WIDTH}px" height="500px" fill="{background}" rx="15"/>',
     ])
     rows = [
         svg_row(50, "OS", OS),
@@ -265,16 +255,16 @@ def render_combined(source: str, dark: bool, stats: dict, today: date.date) -> s
         svg_row(370, "Discord", "sunny17347"),
         section_row(410, "GitHub Stats", text),
         (f'<tspan x="{PANEL_X}" y="430" class="andrew-cc">. </tspan><tspan class="andrew-key">Repos</tspan><tspan>:</tspan><tspan class="andrew-cc"> ....</tspan>'
-         f'<tspan x="{590 - len(value(stats["repos"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["repos"])}</tspan>'
-         f'<tspan x="610" class="andrew-cc"> &#123;</tspan><tspan class="andrew-key">Contributed</tspan><tspan>: </tspan>'
-         f'<tspan x="{775 - len(value(stats["contributed"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["contributed"])}</tspan>'
-         f'<tspan x="790" class="andrew-cc"> &#125; | </tspan><tspan class="andrew-key">Stars</tspan><tspan>:</tspan>'
-         f'<tspan x="{790 + len(" } | Stars:") * CHAR_WIDTH:.1f}" class="andrew-cc">{"." * max(1, round((VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH - (790 + len(" } | Stars:") * CHAR_WIDTH)) / CHAR_WIDTH))}</tspan>'
+         f'<tspan x="{PANEL_X + 200 - len(value(stats["repos"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["repos"])}</tspan>'
+         f'<tspan x="{PANEL_X + 220}" class="andrew-cc"> &#123;</tspan><tspan class="andrew-key">Contributed</tspan><tspan>: </tspan>'
+         f'<tspan x="{PANEL_X + 385 - len(value(stats["contributed"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["contributed"])}</tspan>'
+         f'<tspan x="{PANEL_X + 400}" class="andrew-cc"> &#125; | </tspan><tspan class="andrew-key">Stars</tspan><tspan>:</tspan>'
+         f'<tspan x="{PANEL_X + 400 + len(" } | Stars:") * CHAR_WIDTH:.1f}" class="andrew-cc">{"." * max(1, round((VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH - (PANEL_X + 400 + len(" } | Stars:") * CHAR_WIDTH)) / CHAR_WIDTH))}</tspan>'
          f'<tspan x="{VALUE_END - len(value(stats["stars"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["stars"])}</tspan>'),
         (f'<tspan x="{PANEL_X}" y="450" class="andrew-cc">. </tspan><tspan class="andrew-key">Commits</tspan><tspan>: ................</tspan>'
-         f'<tspan x="{700 - len(value(stats["commits"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["commits"])}</tspan>'
-         f'<tspan x="720" class="andrew-cc"> | </tspan><tspan class="andrew-key">Followers</tspan><tspan>:</tspan>'
-         f'<tspan x="{720 + len(" | Followers:") * CHAR_WIDTH:.1f}" class="andrew-cc">{"." * max(1, round((VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH - (720 + len(" | Followers:") * CHAR_WIDTH)) / CHAR_WIDTH))}</tspan>'
+         f'<tspan x="{PANEL_X + 310 - len(value(stats["commits"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["commits"])}</tspan>'
+         f'<tspan x="{PANEL_X + 330}" class="andrew-cc"> | </tspan><tspan class="andrew-key">Followers</tspan><tspan>:</tspan>'
+         f'<tspan x="{PANEL_X + 330 + len(" | Followers:") * CHAR_WIDTH:.1f}" class="andrew-cc">{"." * max(1, round((VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH - (PANEL_X + 330 + len(" | Followers:") * CHAR_WIDTH)) / CHAR_WIDTH))}</tspan>'
          f'<tspan x="{VALUE_END - len(value(stats["followers"])) * CHAR_WIDTH:.1f}" class="andrew-value">{svg_escape(stats["followers"])}</tspan>'),
     ]
     loc_close_x = VALUE_END - 10
@@ -311,8 +301,8 @@ def main() -> None:
         stats = public_stats()
     light = ROOT / "light_mode.svg"
     dark = ROOT / "dark_mode.svg"
-    light.write_text(render_combined(light.read_text(encoding="utf-8"), False, stats, today), encoding="utf-8")
-    dark.write_text(render_combined(dark.read_text(encoding="utf-8"), True, stats, today), encoding="utf-8")
+    light.write_text(render_card(False, stats, today), encoding="utf-8")
+    dark.write_text(render_card(True, stats, today), encoding="utf-8")
     print(json.dumps({"date": today.isoformat(), "age": age(today), "stats": stats}, indent=2))
 
 
